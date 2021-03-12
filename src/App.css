@@ -1,0 +1,343 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+body {
+  background-color: #ebebea !important;
+}
+.p2{
+  padding: 20px;
+}
+.pt2 {
+  padding-top: 20px;
+}
+.pt6 {
+  padding-top: 60px;
+}
+.pt8 {
+  padding-top: 80px;
+}
+.mt05 {
+  margin-top: 5px !important;
+}
+.pb2{
+  padding-bottom: 20px;
+}
+.page-name{
+  display: grid;
+  justify-content: center;
+  align-items: center !important;
+  margin-left: 265px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  box-shadow: 1px 1px 7px #cacac8;
+  border: 1px solid #F3F2EF;
+  background-color: #15171C;
+  border-radius: 10px;
+  color: #f3f2ef;
+}
+.page-name h3 {
+  padding: 5px;
+}
+.inventory, .sales, .reports, .information, .account, .settings, .addproduct, .addpartner, .products, .addproduct_p, .allpartners, .terms, .newuser {
+  margin-left: 265px;
+  margin-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 7px #cacac8;
+  border: 1px solid #F3F2EF;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.top-filter-cont{
+  display: flex;
+  justify-content: center;
+}
+.filter-product {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  width: 280px;
+  background-color: rgb(216, 216, 216);
+  border-radius: 10px;
+}
+.product-fields {
+  padding-top: 30px;
+
+}
+.product-fields .col-sm-4, .company-fields .col-sm-4 {
+  height: 100px;
+}
+.addpartner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.partner-container {
+  display: flex;
+
+}
+.information {
+
+
+}
+.products, .allpartners {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sales, .reports {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sales .search-bar {
+  width: 90%;
+  margin-bottom: 15px;
+  border: 1px solid #01ced1;
+}
+.exportButtonContainer {
+  margin-bottom: 15px;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.exportButtonContainer button {
+  margin: 15px;
+}
+.btn-upload {
+  position: relative;
+  overflow: hidden;
+}
+.btn-upload-input {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+.information .btn-lg {
+  font-size: 15px !important;
+}
+.info-profile{
+  text-align: center;
+}
+.information .img-holder {
+  padding-bottom: 15px;
+}
+.information .left-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.information .left-buttons .btn{
+  margin: 5px !important;
+}
+.products .table, .allpartners .table, .sales .table, .reports .table{
+  width: 90%;
+}
+.table-striped {
+  background-color: #f2f2f2;
+}
+
+.allpartners .edit-delete {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+}
+.align-btn-center {
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+}
+.btn-size{
+  width: 250px;
+}
+.btn-size-2 {
+  background-color: #005e5e !important;
+  border-color: #005e5e !important;
+}
+
+.btn-size-2:hover {
+  background-color: #004b4b !important;
+  border-color: #005e5e !important;
+}
+.btn-size-2 svg, .btn-size-3 svg  {
+  font-size: 18px;
+  margin-right: 7px;
+}
+.edit {
+  color: green;
+  font-size: 18px;
+  margin-right: 5px;
+}
+.delete {
+  color: red;
+  font-size: 18px;
+  margin-left: 5px;
+}
+.edit-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.company-b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  width: 140px;
+  height: 30px;
+  padding: 7px;
+  background: #005e5e;
+  border-radius: 10px;
+  color: #fff !important;
+}
+.company-b-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  width: 140px;
+  height: 30px;
+  padding: 7px;
+  border-radius: 10px;
+  color: #15171c !important;
+}
+.company-b svg, .company-b-2 svg {
+  margin-right: 7px;
+}
+.filter-product a:hover {
+  text-decoration: none !important;
+}
+.person-b {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  width: 140px;
+  height: 30px;
+  text-align: left;
+  padding: 7px;
+  border-radius: 0 10px 10px 0;
+  color:#15171c !important;
+}
+.person-b-2 {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  width: 140px;
+  height: 30px;
+  text-align: left;
+  padding: 7px;
+  border-radius: 10px;
+  background: #005e5e;
+  color: #fff !important;
+}
+.person-b svg, .person-b-2 svg {
+  margin-right: 7px;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem hsla(180, 100%, 18%, 0.25) !important;
+}
+.form-control {
+  background-color: #f2f2f2 !important;
+}
+.SidebarNav {
+  background: #15171c;
+  width: 250px;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+}
+.SidebarNav a:hover{
+  color: #fff;
+  text-decoration: none !important;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
+.img-holder img{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  
+}
+.profile-name {
+  padding-top: 15px;
+  color: #fff;
+}
+
+.SidebarLink {
+  display: flex;
+  color: #e1e9fc;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+  height: 40px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.SidebarLink svg {
+  color: #01ced1;
+}
+
+.SidebarLink:hover {
+  background: #252831;
+  border-left: 4px solid #01ced1;
+  cursor: pointer;
+}
+
+.SidebarNav #active {
+  background: #202229;
+  border-left: 4px solid #01ced1;
+  cursor: pointer;
+}
+
+.SidebarLabel {
+  margin-left: 16px;
+}
+
+.DropdownLink {
+  background: #252831;
+  height: 40px;
+  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 16px;
+}
+
+.DropdownLink svg {
+  color: #01ced1;
+}
+
+.DropdownLink:hover {
+  background: #005e5e;
+  cursor: pointer;
+}
+.footer {
+  left: 0;
+  bottom: 0;
+  margin-left: 60px;
+  position: fixed;
+  color: white;
+  font-size: 12px;
+}
