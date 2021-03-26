@@ -64,6 +64,10 @@ const information = () => {
                         <label for="tabel" className="form-label">Email</label>
                         <input type="email" placeholder="mobiphonetetove@gmail.com" className="form-control" id="shifra" aria-describedby="shifra"></input>
                     </div>
+                    <div class="col-sm-4">
+                        <label for="tabel" className="form-label">Webfaqja</label>
+                        <input type="email" placeholder="www.mobiphone.com" className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
                 <div className="col-sm-12 align-btn-center p2">
                     <div class="col-sm-4">
                         <button type="button" className="btn btn-success btn-size">Ruaj të dhënat</button>

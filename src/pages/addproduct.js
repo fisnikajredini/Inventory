@@ -36,7 +36,10 @@ const addproduct = () => {
                     </div>
                     <div class="col-sm-4">
                         <label for="tabel" className="form-label">Kategoria</label>
-                        <select className="form-control" id="shifra" aria-describedby="shifra"></select>
+                        <select className="form-control" id="shifra" aria-describedby="shifra">
+                            <option>Celular</option>
+                            <option>Tablet</option>
+                        </select>
                     </div>
                     <div class="col-sm-4">
                         <label for="tabel" className="form-label">Data</label>

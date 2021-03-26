@@ -254,7 +254,7 @@ body {
   width: 250px;
   min-height: 100vh;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
 }
 .SidebarNav a:hover{
@@ -343,7 +343,6 @@ body {
   position: fixed;
   display: flex;
   justify-content: center;
-  height: 750px;
   width: 350px;
   top: 63px;
   background: #fff;

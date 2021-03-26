@@ -22,6 +22,7 @@ const reports = () => {
                 <th scope="col">Data</th>
                 <th scope="col">Garancion</th>
                 <th scope="col">Blerësi</th>
+                <th scope="col">Partneri</th>
                 <th scope="col">Çmimi shitës</th>
                 <th scope="col">Shitësi</th>
                 <th scope="col">Edit/Delete</th>
@@ -35,9 +36,10 @@ const reports = () => {
                 <td>12.05.2019</td>
                 <td>12.05.2019</td>
                 <td>Fisnik</td>
+                <td>Mobiphone</td>
                 <td>350</td>
                 <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete"><RiIcons.RiDeleteBin6Fill /></div></td>
+                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
                 </tr>
                 <tr>
                 <th scope="row">2</th>
@@ -46,9 +48,10 @@ const reports = () => {
                 <td>16.09.2020</td>
                 <td>16.09.2020</td>
                 <td>Niki</td>
+                <td>Mobiphone</td>
                 <td>450</td>
                 <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete"><RiIcons.RiDeleteBin6Fill /></div></td>
+                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
                 </tr>
                 <tr>
                 <th scope="row">3</th>
@@ -57,9 +60,10 @@ const reports = () => {
                 <td>28.09.2021</td>
                 <td>28.09.2021</td>
                 <td>Buda</td>
+                <td>Mobiphone</td>
                 <td>550</td>
                 <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete"><RiIcons.RiDeleteBin6Fill /></div></td>
+                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
                 </tr>
             </tbody>
             </table>

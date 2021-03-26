@@ -38,7 +38,8 @@ export class newuser extends Component {
                                 <label for="exampleFormControlSelect1">Roli i përdoruesit</label>
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option>Administrator</option>
-                                    <option>User</option>
+                                    <option>Kasier</option>
+                                    <option>Serviser</option>
                                 </select>
                             </div>
                         </div>

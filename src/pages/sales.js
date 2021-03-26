@@ -7,6 +7,7 @@ const RightbarNav = styled.nav`
     right: ${({ rightbar }) => (rightbar ? '16px' : '-100%')};
     transition: 350ms;
     z-index: 10;
+    height: 800px;
 `;
 
 const Sales = () => {
