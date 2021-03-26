@@ -6,6 +6,8 @@
 }
 body {
   background-color: #ebebea !important;
+  height: 100%;
+  width: 100%;
 }
 .p2{
   padding: 20px;
@@ -80,10 +82,6 @@ body {
 }
 .partner-container {
   display: flex;
-
-}
-.information {
-
 
 }
 .products, .allpartners {
@@ -254,7 +252,7 @@ body {
 .SidebarNav {
   background: #15171c;
   width: 250px;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
   position: absolute;
   top: 0;
@@ -340,4 +338,42 @@ body {
   position: fixed;
   color: white;
   font-size: 12px;
+}
+.sales-tab {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  height: 750px;
+  width: 350px;
+  top: 63px;
+  background: #fff;
+  -webkit-box-shadow: -11px 15px 23px -19px rgba(0,0,0,0.35);
+  -moz-box-shadow: -11px 15px 23px -19px rgba(0,0,0,0.35);
+  box-shadow: -11px 15px 23px -19px rgba(0,0,0,0.35);
+}
+.cashier {
+  position: absolute;
+  top: 17px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #01ced1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.cashier svg {
+  color: #15171C;
+  font-size: 20px;
+}
+
+.cart_container_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart_container_btn button{
+  width: 100%;
 }

@@ -32,7 +32,7 @@ export const SidebarData = [
         ]
     },
     {
-        title: 'Shtije',
+        title: 'Shitje',
         path: '/sales',
         icon: <FaIcons.FaCartPlus />,
     },
@@ -52,7 +52,7 @@ export const SidebarData = [
         icon: <RiIcons.RiAccountCircleFill />,
     },
     {
-        title: 'Përditësimet',
+        title: 'Servisi',
         path: '/settings',
         icon: <AiIcons.AiFillSetting />,
     },

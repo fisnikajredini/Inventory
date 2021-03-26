@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
+import styled from 'styled-components';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
 
+const RightbarNav = styled.nav` 
+    right: ${({ rightbar }) => (rightbar ? '16px' : '-100%')};
+    transition: 350ms;
+    z-index: 10;
+`;
 
+const Sales = () => {
+    const [rightbar, setRightbar] = useState(false)
+    const showRightbar = () => setRightbar(!rightbar)
 
-const sales = () => {
     return (
         <>
             <div className="page-name">
                 <h3>Shitjet</h3>
+                <div className="cashier" onClick={showRightbar}><FaIcons.FaCashRegister/></div>
             </div>
         <div className='sales pt2'>
             <input type="text" id="myInput" className="form-control search-bar" placeholder="Kërko paisjen..."></input>
@@ -53,9 +64,60 @@ const sales = () => {
                 </tbody>
             </table>
         </div>
+        <RightbarNav rightbar={rightbar} className="sales-tab">
+            <div className="container pt2">
+                <div className="col-sm-12">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Mënyra e pagesës:</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>Para në dorë</option>
+                            <option>Kartelë</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tabel" className="form-label">Totali:</label>
+                        <input type="input" placeholder="automatik prej listes" className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tabel" className="form-label">Zbritje:</label>
+                        <input type="input" placeholder="0.00" className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tabel" className="form-label">Totali final:</label>
+                        <input type="input" placeholder="totali final " className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tabel" className="form-label">Pranoj:</label>
+                        <input type="input" placeholder="0.00" className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tabel" className="form-label">Kusur:</label>
+                        <input type="input" placeholder="0.00" className="form-control" id="shifra" aria-describedby="shifra"></input>
+                    </div>
+                </div>
+                <div className="cart_container_btn pt2">
+                    <div class="col-sm-6 </div>">
+                        <button type="button" class="btn btn-danger">Anulo</button>
+                    </div>
+                    <div class="col-sm-6 </div>">
+                        <button type="button" class="btn btn-success">Vazhdo</button>
+                    </div>
+                </div>
+            </div>
+        </RightbarNav>
         </>
 
     )
 }
 
-export default sales
+export default Sales
