@@ -39,16 +39,16 @@ function Products() {
                     <th scope="col">Edit/Delete</th>
                     </tr>
                 </thead>
-                {products.map(product => (
+                {products.reverse().map(product => (
                 <tbody>
                     <tr>
                     <th scope="row" key={product.id}>1</th>
-                    <td key={product.id}>{product.product_name}</td>
-                    <td key={product.id}>{product.imei}</td>
-                    <td key={product.id}>{product.date}</td>
-                    <td key={product.id}>{product.buying_price}</td>
-                    <td key={product.id}>{product.selling_price}</td>
-                    <td key={product.id}>{product.buyer}</td>
+                    <td>{product.product_name}</td>
+                    <td>{product.imei}</td>
+                    <td>{product.date}</td>
+                    <td>{product.buying_price}</td>
+                    <td>{product.selling_price}</td>
+                    <td>{product.buyer}</td>
                     <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete"><RiIcons.RiDeleteBin6Fill /></div></td>
                     </tr>
                 </tbody>

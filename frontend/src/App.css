@@ -96,7 +96,6 @@ body {
   flex-direction: column;
 }
 .sales .search-bar {
-  width: 90%;
   margin-bottom: 15px;
   border: 1px solid #01ced1;
 }

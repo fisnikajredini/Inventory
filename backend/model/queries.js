@@ -135,9 +135,20 @@ const updateProduct = (id, data) => {
     });
 };
 
-const getByEmailProduct = (email) => {
+const getByImeiProduct = (imei) => {
     return new Promise((success, fail) => {
-        Products.findOne({ email: email }, (err, data) => {
+        Products.findOne({ imei: imei }, (err, data) => {
+            if (err) {
+                return fail(err);
+            }
+            return success(data);
+        })
+    });
+}
+
+const getByNameProduct = (name) => {
+    return new Promise((success, fail) => {
+        Products.find({ product_name: name }, (err, data) => {
             if (err) {
                 return fail(err);
             }
@@ -292,7 +303,8 @@ module.exports = {
     createNewProduct,
     removeProduct,
     updateProduct,
-    getByEmailProduct,
+    getByImeiProduct,
+    getByNameProduct,
     Partners,
     readAllPartner,
     createNewPartner,

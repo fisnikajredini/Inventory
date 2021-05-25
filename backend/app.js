@@ -75,6 +75,20 @@ app.get("/products/get", (req, res) => {
     });
 });
 
+app.post("/products/get/byimei", (req, res) => {
+    queries.getByImeiProduct(req.body.imei).then((data) => {
+        console.log(data)
+        res.json({data: data});
+    });
+});
+
+app.post("/products/get/byname", (req, res) => {
+    queries.getByNameProduct(req.body.name).then((data) => {
+        console.log(data)
+        res.json({data: data});
+    });
+});
+
 app.post("/products/add/company", (req, res) => {
     console.log(req.body)
     let data = {
