@@ -143,7 +143,7 @@ function Addproduct_p({partners}) {
                             <div class="col-sm-4">
                                 <label for="tabel" className="form-label">Data</label>
                                 <input type="date" className="form-control" name="productDate"
-                                       value={inputField.productDate, date}
+                                       value={inputField.productDate + date}
                                        onChange={event => handleChangeInput(index, event)}
                                        aria-describedby="emri-produktit"></input>
                             </div>

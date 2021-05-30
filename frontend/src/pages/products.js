@@ -134,13 +134,13 @@ function Products() {
                     <th scope="col">Data</th>
                     <th scope="col">Çmimi blerës</th>
                     <th scope="col">Çmimi shitës</th>
-                    <th scope="col">Partneri</th>
-                    <th scope="col">Nr. Fakturës</th>
+                    <th scope="col">Partneri / Personi</th>
+                    <th scope="col">Nr. Fakturës / Nr. ID</th>
                     <th scope="col">Kategoria</th>
-                    <th scope="col">Edit/Delete</th>
+                    <th scope="col">Edit / Delete</th>
                     </tr>
                 </thead>
-                {products.map((product, id, key) =>
+                {[...products].reverse().map((product, id, key) =>
                 <tbody>
                     <tr>
                     <th scope="row" key={product._id}>1</th>
@@ -149,8 +149,8 @@ function Products() {
                     <td>{product.date}</td>
                     <td>{product.buying_price}</td>
                     <td>{product.selling_price}</td>
-                    <td>{product.buyer}</td>
-                    <td>{product.facture_number}</td>
+                    <td>{product.buyer || product.name_surname}</td>
+                    <td>{product.facture_number || product.id_number}</td>
                     <td>{product.category}</td>
                     <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete" onClick={() => removeProduct(product._id)}><RiIcons.RiDeleteBin6Fill /></div></td>
                     </tr>

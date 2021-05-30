@@ -19,11 +19,6 @@ function Addproduct() {
     // })
 
     
-    //Default Date current day
-    // var someDate = new Date();
-    // someDate.setDate(someDate.getDate());
-    // var date = someDate.toISOString().substr(0, 10);
-    
     const [inputFields, setInputFields] = useState ([
         {productName: '', productImei: '', productCategory:'', productDate: '', productPartner: '', productBuyPrice: '', productSellPrice: '', productRecieptNumber: ''},  
     ]);
@@ -43,7 +38,7 @@ function Addproduct() {
         // this.setState({company_name: response.data.data });
         // });
     }, []);
-    
+     
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
@@ -71,7 +66,13 @@ function Addproduct() {
             inputFields[0].productRecieptNumber != null &&
             inputFields[0].productRecieptNumber != "" &&
             inputFields[0].productRecieptNumber != undefined
-          ) {
+
+            
+          )  {
+              //Default Date current day
+            const someDate = new Date();
+            someDate.setDate(someDate.getDate());
+            const productDate = someDate.toISOString().substr(0, 10);
         axios.post('/products/add/company', {
             product_name: inputFields[0].productName,
             imei: inputFields[0].productImei,
@@ -81,6 +82,7 @@ function Addproduct() {
             buying_price: inputFields[0].productBuyPrice,
             selling_price: inputFields[0].productSellPrice,
             facture_number: inputFields[0].productRecieptNumber,
+            
         }).then();
         Swal.fire({
             icon: "success",
@@ -133,10 +135,6 @@ function Addproduct() {
                 <div className="form-container" onSubmit={handleSubmit}>
                 { inputFields.map((inputField, index) => (
                     <div className="product-fields container input-group" key={index}>
-                        {/* <div class="col-sm-4">
-                            <label for="tabel" className="form-label">Shifra</label>
-                            <input type="number" placeholder="Gjenerim Automatik" className="form-control" id="shifra" aria-describedby="shifra"></input>
-                        </div> */}
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Emri i Produktit</label>
                             <input type="input" required name="productName" className="form-control" value={inputField.productName} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
@@ -147,14 +145,14 @@ function Addproduct() {
                         </div>
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Kategoria</label>
-                            <select className="form-control" name="productCategory" value={inputField.productCategory} onChange={event => handleChangeInput(index, event)} aria-describedby="shifra">
+                            <select className="form-control" name="productCategory" defaultValue={inputField.productCategory+"Celular"} onChange={event => handleChangeInput(index, event)} aria-describedby="shifra">
                                 <option>Celular</option>
                                 <option>Tablet</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Data</label>
-                            <input type="date" className="form-control" name="productDate" value={inputField.productDate} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
+                            <input type="date" className="form-control" name="productDate" defaultValue={inputField.productDate} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
                         </div>
                         <div class="col-sm-4">
                         <label for="tabel" className="form-label">Blerësi</label>
