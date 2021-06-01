@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as RiIcons from 'react-icons/ri';
+import axios from 'axios';
+import Swal from "sweetalert2";
 
-const reports = () => {
+
+function Reports() {
+
+    const [products, setProducts] = useState ([]);
+
+    useEffect(() => {
+        axios.get('/sales/get').then(res=>{
+           // partners = data.data.data
+            console.log(res.data.data)
+            setProducts(res.data.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        // axios.get("/getpartner").then((response) => {
+        // this.setState({company_name: response.data.data });
+        // });
+    }, []);
+
     return (
         <>
             <div className="page-name">
@@ -28,48 +48,26 @@ const reports = () => {
                 <th scope="col">Edit/Delete</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>iPhone 8 plus</td>
-                <td>545466548786</td>
-                <td>12.05.2019</td>
-                <td>12.05.2019</td>
-                <td>Fisnik</td>
-                <td>Mobiphone</td>
-                <td>350</td>
-                <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Samsung s5</td>
-                <td>546865421100</td>
-                <td>16.09.2020</td>
-                <td>16.09.2020</td>
-                <td>Niki</td>
-                <td>Mobiphone</td>
-                <td>450</td>
-                <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Huawei</td>
-                <td>7687541286453</td>
-                <td>28.09.2021</td>
-                <td>28.09.2021</td>
-                <td>Buda</td>
-                <td>Mobiphone</td>
-                <td>550</td>
-                <td>Ifran Ferati</td>
-                <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div></td>
-                </tr>
-            </tbody>
+            {[...products].reverse().map((product, id, key) =>
+                <tbody>
+                    <tr>
+                    <th scope="row" key={product._id}>1</th>
+                    <td>{product.product_name}</td>
+                    <td>{product.imei}</td>
+                    <td>{product.date}</td>
+                    <td>{product.garantion_date}</td>
+                    <td>{product.first_name + product.last_name}</td>
+                    <td>{product.buyer || product.name_surname}</td>
+                    <td>{product.selled_price}</td>
+                    <td>{product.category}</td>
+                    <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete" ><RiIcons.RiDeleteBin6Fill /></div></td>
+                    </tr>
+                </tbody>
+                )}
             </table>
             </div>
         </>
     )
 }
 
-export default reports
+export default Reports

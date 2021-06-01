@@ -129,8 +129,9 @@ function Sales() {
         })
     }
 
-    function addToSalesTable(product) {
-        let inputs = product;
+    function addToSalesTable(e) {
+     
+        let inputs = products;
         axios.post('/sales/add', inputs, {
             first_name: garantionValues.firstName,
             last_name: garantionValues.lastName,
@@ -154,10 +155,11 @@ function Sales() {
     //     //product.push(the 4 new values of the inputs)
     // }
 
-    function handleChangeGarantion(index, event){
-        const values = [...garantionValues];
-        values[index][event.target.name] = event.target.value;
+    function handleChangeGarantion(e){
+        const values = {...garantionValues};
+        values[e.target.name] = e.target.value;
         setGarantionValues(values);
+        console.log(values)
 
     }
 
@@ -284,40 +286,39 @@ function Sales() {
                     )}
                 </div>
             </RightbarNav>
-            <GarantionForm garantionform={garantionform} className="garantion-form">
+            <GarantionForm garantionform={garantionform} onSubmit={(e) => addToSalesTable(e)} className="garantion-form">
                 <div className="close-form" onClick={showgarantionform}>X</div>
-                <div className="popup-form" onSubmit={addToSalesTable} >
+                    
+                <div className="popup-form">
                     <div className="form-group">
                         <h3 className="title pt-2">Garancioni:</h3>
                     </div>
-                    { garantionValues.map((garantionValue, index) => (
-                       <div key={index}> 
+                       <div> 
                     <div className="row garantion-inputs col-sm-12">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <input type="input" placeholder="Emri" name="firstName" className="form-control" id="shifra" aria-describedby="shifra" value={garantionValue.firstName} onChange={event => handleChangeGarantion(index, event)}></input>
+                                <input type="input" placeholder="Emri" name="firstName" className="form-control" id="firstName" aria-describedby="shifra" value={garantionValues.firstName} onChange={e => handleChangeGarantion(e)}></input>
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <input type="input" placeholder="Mbiemri" name="lastName" className="form-control" id="shifra" aria-describedby="shifra" value={garantionValue.lastName} onChange={event => handleChangeGarantion(index, event)}></input>
+                                <input type="input" placeholder="Mbiemri" name="lastName" className="form-control" id="lastName" aria-describedby="shifra" value={garantionValues.lastName} onChange={e => handleChangeGarantion(e)}></input>
                             </div>
                         </div>
                     </div>
                     <div className="row garantion-inputs col-sm-12">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <input type="input" placeholder="Nr. Telefonit" name="contactNr" className="form-control" id="shifra" aria-describedby="shifra" value={garantionValue.contactNr} onChange={event => handleChangeGarantion(index, event)}></input>
+                                <input type="input" placeholder="Nr. Telefonit" name="contactNr" className="form-control" id="contactNr" aria-describedby="shifra" value={garantionValues.contactNr} onChange={e => handleChangeGarantion(e)}></input>
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <input type="input" placeholder="Garancion / Muaj" name="garantionDate" className="form-control" id="shifra" aria-describedby="shifra" value={garantionValue.garantionDate} onChange={event => handleChangeGarantion(index, event)}></input>
+                                <input type="input" placeholder="Garancion / Muaj" name="garantionDate" className="form-control" id="garantionDate" aria-describedby="shifra" value={garantionValues.garantionDate} onChange={e => handleChangeGarantion(e)}></input>
                             </div>
                         </div>
                     </div>
                     </div>
-                            )) }
                     {cartItems.map((product) => (
                         <div className="col-md-12" key={product.id}>
                             <div className="form-group">
@@ -334,6 +335,7 @@ function Sales() {
                     ))}
 
                 </div>
+                       
             </GarantionForm>
         </>
 
