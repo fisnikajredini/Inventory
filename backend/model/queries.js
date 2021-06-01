@@ -236,12 +236,22 @@ const getByEmailPartner = (email) => {
 const Sales = mongoose.model(
     'Sales',
     {
-        company_name: String,
-        category:String,
-        subCategory:String,
-        subsubCategory:String,
-        date: String,
-        Life:Number,
+        product_name: String,
+        imei:  { type: Number, unique: true },
+        category: String,
+        date: Date,
+        buyer: String,
+        buying_price: Number,
+        selling_price: Number,
+        facture_number: Number,
+        name_surname: String,
+        tel_num: Number,
+        id_number: String,
+        first_name:String,
+        last_name:String,
+        client_tel_num:Number,
+        garantion_date:Date,
+        selled_price: Number
     },
     'Sales'
 );

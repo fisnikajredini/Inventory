@@ -178,7 +178,17 @@ app.get("/sales/get", (req, res) => {
 });
 
 app.post("/sales/add", (req, res) => {
-
+    console.log(req.body)
+    queries.createNewSale(req.body).then(
+        queries.removeProduct(req.body.id)
+        .then(() => {
+            res.json({data: "Product Deleted Successfully"});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("internal server errorr");
+        })
+    )
 });
 
 app.post("/sales/edit", (req, res) => {
