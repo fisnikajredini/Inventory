@@ -120,12 +120,12 @@ function Addproduct() {
         setInputFields([...inputFields, { 
             productName: '', 
             productImei: '', 
-            productCategory:'', 
-            productDate: '', 
-            productPartner: '', 
+            productCategory:'Celular', 
+            productDate: date, 
+            productPartner: inputFields.productPartner, 
             productBuyPrice: '', 
             productSellPrice: '', 
-            productRecieptNumber: '' 
+            productRecieptNumber: inputFields.productRecieptNumber
         }])
     }
     //Function to remove the fields
@@ -167,10 +167,13 @@ function Addproduct() {
                                 <option>Tablet</option>
                             </select>
                         </div>
+                        {index==0 ?
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Data</label>
                             <input type="date" className="form-control" name="productDate" value={inputField.productDate} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
-                        </div>
+                        </div> :null
+                            }
+                            {index==0 ?
                         <div class="col-sm-4">
                         <label for="tabel" className="form-label">Blerësi</label>
                             <select className="form-control" name="productPartner" value={inputField.productPartner} onChange={event => handleChangeInput(index, event)} aria-describedby="shifra">
@@ -179,7 +182,8 @@ function Addproduct() {
                                 <option key={partner.id}>{partner.company_name}</option> 
                                 ))}
                             </select>
-                        </div>
+                        </div> :null
+                            }
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Çmimi blerës</label>
                             <input type="number" className="form-control" name="productBuyPrice" value={inputField.productBuyPrice} onChange={event => handleChangeInput(index, event)} aria-describedby="shifra"></input>
@@ -188,10 +192,12 @@ function Addproduct() {
                             <label for="tabel" className="form-label">Çmimi shitës</label>
                             <input type="number" className="form-control" name="productSellPrice" value={inputField.productSellPrice} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
                         </div>
+                            {index==0 ?
                         <div class="col-sm-4">
                             <label for="tabel" className="form-label">Nr. fakturës</label>
                             <input type="number" className="form-control" name="productRecieptNumber" value={inputField.productRecieptNumber} onChange={event => handleChangeInput(index, event)} aria-describedby="imei"></input>
-                        </div>
+                        </div> :null
+                            }
                         <div className="col-sm-12">
                             <button type="button" className="btn btn-danger btn-size-4" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                             <AiIcons.AiOutlineMinusCircle />

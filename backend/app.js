@@ -4,7 +4,12 @@ const port = 5000;
 const queries = require("./model/queries");
 const db = require("./db/db");
 const bodyParser = require("body-parser");
+const pdf = require('html-pdf');
+const cors = require('cors');
 
+const pdfTemplate = require('./documents');
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(
@@ -20,6 +25,21 @@ app.get("/users/get", (req, res) => {
         res.json({data: data});
     });
 });
+
+app.post('/create-pdf', (req, res) => {
+    pdf.create(pdfTemplate(req.body), {}).toFile('result.pdf', (err) => {
+        if(err) {
+            res.send(Promise.reject());
+        }
+
+        res.send(Promise.resolve());
+    });
+});
+
+app.get('/fetch-pdf', (req, res) => {
+    res.sendFile(`${__dirname}/result.pdf`)
+})
+
 
 app.post("/users/add", (req, res) => {
     // let firma = req.body.firma;

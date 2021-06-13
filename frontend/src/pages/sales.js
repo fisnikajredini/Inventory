@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import * as FaIcons from 'react-icons/fa';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { saveAs } from 'file-saver';
+import logo from '../logo.png'
 // import * as AiIcons from 'react-icons/ai';
 
 
@@ -82,8 +84,6 @@ function Sales() {
     }
 
     const itemPrice = cartItems.reduce((a, c) => a + c.selling_price * c.qty, 0);
-    const discountPrice = itemPrice - discount;
-    const change = recieve - discountPrice;
 
     useEffect(() => {
         axios.get('/products/get').then(res => {
@@ -137,7 +137,7 @@ function Sales() {
             last_name: garantionValues.lastName,
             client_tel_num: garantionValues.contactNr,
             garantion_date: garantionValues.garantionDate,
-            selled_price: cartItems.discountPrice
+            selled_price: cartItems.itemPrice
         })
             .then((id)=>{
                 axios.post('/product/delete/product', { id:id }).then()
@@ -150,15 +150,6 @@ function Sales() {
 
     }
 
-    // function handleChangeGarantion(event){
-    //     setGranationValues({
-    //         ...setGranationValues,
-    //         //[event.target.name]: event.target.value
-    //     })
-    //     //save with use state 4 fields name surname date num tel and 
-    //     //product.push(the 4 new values of the inputs)
-    // }
-
     function handleChangeGarantion(e) {
         const values = { ...garantionValues };
         values[e.target.name] = e.target.value;
@@ -167,11 +158,21 @@ function Sales() {
 
     }
 
+    function createAndDownloadPdf() {
+        axios.post('/create-pdf', garantionValues, cartItems, logo)
+        .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
+        .then((res) => {
+          const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+  
+          saveAs(pdfBlob, 'newPdf.pdf');
+        })
+    }
+
     return (
         <>
             <div className="page-name">
                 <h3>Shitjet</h3>
-                <div className="cashier" onClick={showRightbar}><FaIcons.FaCashRegister /></div>
+                {/* <div className="cashier" onClick={showRightbar}><FaIcons.FaCashRegister /></div> */}
             </div>
             <div className='sales pt2' onAdd={onAdd}>
                 <div className="row col-sm-12">
@@ -212,87 +213,17 @@ function Sales() {
                                 <td>{product.date}</td>
                                 <td>{product.buyer}</td>
                                 <td>{product.selling_price}</td>
-                                <td><button onClick={() => onAdd(product)} className="btn btn-success">Add To Cart</button></td>
+                                <td><button onClick={() => {onAdd(product); showgarantionform();}} className="btn btn-success">Add To Cart</button></td>
                             </tr>
                         </tbody>
                     )}
                 </table>
             </div>
-            <RightbarNav rightbar={rightbar} className="sales-tab">
-                <div cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} className="container pt2">
-                    <div className="col-sm-12">
-                        <div className="form-group">
-                            <div>{cartItems.length === 0 && <div>Nuk keni zgjedhur asnjë produkt</div>}</div>
-                            {cartItems.map((product) => (
-                                <div key={product.id} className="row">
-                                    <div className="col-12 product-name">{product.product_name} <br /> {product.imei}</div>
-                                    {/* <div className="col-2">
-                                    <button onClick={()=>onAdd(product)} className="add">+</button>
-                                    <button onClick={()=>onRemove(product)} className="btn btn-danger">-</button>
-                                </div>
-                                <div className="col-2">
-                                    {product.selling_price.toFixed() + "€"}
-                                </div> */}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    {cartItems.length !== 0 && (
-                        <>
-                            <div className="col-sm-12">
-                                <div className="form-group">
-                                    <label for="exampleFormControlSelect1">Mënyra e pagesës:</label>
-                                    <select className="form-control" id="exampleFormControlSelect1">
-                                        <option>Para në dorë</option>
-                                        <option>Kartelë</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-sm-12">
-                                <div className="form-group">
-                                    <label for="tabel" className="form-label">Totali: {itemPrice.toFixed() + "€"}</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="tabel" className="form-label">Zbritje:</label>
-                                    <input type="input" placeholder="0.00" className="form-control" id="shifra" onChange={event => setDiscount(event.target.value)} aria-describedby="shifra"></input>
-                                </div>
-                            </div>
-                            <div className="col-sm-12">
-                                <div className="form-group">
-                                    <label for="tabel" className="form-label product-name">Totali final: {discountPrice.toFixed() + "€"}</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-12">
-                                <div className="form-group">
-                                    <label for="tabel" className="form-label">Pranoj:</label>
-                                    <input type="input" placeholder="0.00" className="form-control" id="shifra" onChange={event => setRecieve(event.target.value)} aria-describedby="shifra"></input>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="tabel" className="form-label">Kusur: {change.toFixed() + "€"}</label>
-
-                                </div>
-                            </div>
-                            <div className="cart_container_btn pt2">
-                                <div className="col-sm-6 </div>">
-                                    {cartItems.map((product) => (
-                                        <button type="button" className="btn btn-danger" onClick={() => onRemove(product)} >Anulo</button>
-                                    ))}
-                                </div>
-                                <div className="col-sm-6">
-                                    <button type="button" className="btn btn-success" onClick={showgarantionform}>Vazhdo</button>
-                                </div>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </RightbarNav>
-            <GarantionForm garantionform={garantionform} onSubmit={(e) => addToSalesTable(e)} className="garantion-form">
-                <div className="close-form" onClick={showgarantionform}>X</div>
-
+            
+            <GarantionForm garantionform={garantionform} onRemove={onRemove} onSubmit={(e) => addToSalesTable(e)} className="garantion-form">
+                {cartItems.map((product) => (
+                <>
+                <div className="close-form" onClick={()=>{onRemove(product); showgarantionform();}}>X</div>
                 <div className="popup-form">
                     <div className="form-group">
                         <h3 className="title pt-2">Garancioni:</h3>
@@ -323,22 +254,22 @@ function Sales() {
                             </div>
                         </div>
                     </div>
-                    {cartItems.map((product) => (
                         <div className="col-md-12" key={product.id}>
                             <div className="form-group">
                                 <label for="tabel" className="form-label garnacion-label">Produkti: <div className="garnacion-pdetails">{product.product_name}</div></label> <br />
                                 <label for="tabel" className="form-label garnacion-label">IMEI:<div className="garnacion-pdetails">{product.imei}</div></label> <br />
-                                <label for="tabel" className="form-label garnacion-label">Cmimi: <div className="garnacion-pdetails">{discountPrice.toFixed() + "€"}</div></label>
+                                <label for="tabel" className="form-label garnacion-label">Cmimi ne €: <div className="garnacion-pdetails"><input type="number" name="itemPrice" className="form-control" id="itemPrice" defaultValue={itemPrice}/></div></label>
                             </div>
                             <div className="row garantion-inputs col-sm-12">
                                 <div className="form-group">
-                                    <button type="button" className="btn btn-success" onClick={() => addToSalesTable(product)}>Ruaj</button>
+                                    <button type="button" className="btn btn-success" onClick={() => {addToSalesTable(product); createAndDownloadPdf();}}>Ruaj</button>
                                 </div>
                             </div>
                         </div>
-                    ))}
 
                 </div>
+                </>
+                ))}
 
             </GarantionForm>
         </>
