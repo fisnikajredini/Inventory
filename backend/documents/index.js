@@ -1,4 +1,4 @@
-module.exports = ({ firstName, lastName, contactNr, garantionDate, logo }) => {
+module.exports = ({ firstName, lastName, garantionDate, product_name, imei }) => {
     const today = new Date();
 return `
 <!doctype html>
@@ -85,7 +85,7 @@ return `
        <body>
           <div class="invoice-box">
             <h1 class="justify-center">Garancion</h1>
-             <table cellpadding="0" cellspacing="0">
+             <table cellpadding="0" cellspacing="0" >
                 <tr class="top">
                    <td colspan="2">
                       <table>
@@ -109,7 +109,6 @@ return `
                          <tr>
                             <td>
                                Klienti: ${firstName} ${lastName}  <br/>
-                               Garancioni vlen deri: 13.06.2022
                             </td>
                             <td>
                                PIB: 4028016529113
@@ -124,29 +123,28 @@ return `
                 </tr>
                 <tr class="item">
                    <td>Emri i produktit:</td>
-                   <td>iPhone 12 Pro Max 128gb White</td>
+                   <td>${product_name}</td>
                 </tr>
                 <tr class="item">
                    <td>IMEI: </td>
-                   <td>128371827318237</td>
+                   <td>${imei}</td>
                 </tr>
              </table>
+             <tr class="information">
+                   <td colspan="2">
+                      <table>
+                         <tr>
+                            <td>
+                              <strong> Garancioni vlen deri: ${garantionDate}</strong>
+                            </td>
+                            <td>
+                            </td>
+                         </tr>
+                      </table>
+                   </td>
+                </tr>
              <br />
-             <ul class="item-terms">
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-                 <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu</li>
-             </ul>
+             
              <!-- <h1 class="justify-center">Total price: 98989</h1> -->
           </div>
        </body>

@@ -30,11 +30,9 @@ function Sales() {
     //const [searchBar, setSearchBar] = useState("");
     const [selected, setSelected] = useState("IMEI");
     const [cartItems, setCartItems] = useState([]);
-    const [discount, setDiscount] = useState([]);
-    const [recieve, setRecieve] = useState([]);
 
     const [garantionValues, setGarantionValues] = useState([
-        {firstName: '', lastName: '', contactNr: '', garantionDate: ''},
+        {firstName: '', lastName: '', contactNr: '', garantionDate: '', sold_price: '',},
     ]);
 
     // const onAdd = (product) => {
@@ -136,7 +134,7 @@ function Sales() {
         inputs[0].last_name = garantionValues.lastName;
         inputs[0].client_tel_num = garantionValues.contactNr;
         inputs[0].garantion_date = garantionValues.garantionDate;
-        inputs[0].selled_price = cartItems.itemPrice;
+        inputs[0].selled_price = garantionValues.sold_price;
 
         let id_to_del = inputs[0]._id;
 
@@ -160,12 +158,13 @@ function Sales() {
     }
 
     function createAndDownloadPdf() {
-        axios.post('/create-pdf', garantionValues, cartItems, logo)
+        // let products;
+        axios.post('/create-pdf', garantionValues, cartItems)
             .then(() => axios.get('fetch-pdf', {responseType: 'blob'}))
             .then((res) => {
                 const pdfBlob = new Blob([res.data], {type: 'application/pdf'});
 
-                saveAs(pdfBlob, 'newPdf.pdf');
+                saveAs(pdfBlob, 'Garancioni.pdf');
             })
     }
 
@@ -271,7 +270,7 @@ function Sales() {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input type="input" placeholder="Garancion / Muaj" name="garantionDate"
+                                            <input type="date" placeholder="Garancion / Muaj" name="garantionDate"
                                                    className="form-control" id="garantionDate" aria-describedby="shifra"
                                                    value={garantionValues.garantionDate}
                                                    onChange={e => handleChangeGarantion(e)}></input>
@@ -287,15 +286,17 @@ function Sales() {
                                         <div className="garnacion-pdetails">{product.imei}</div>
                                     </label> <br/>
                                     <label for="tabel" className="form-label garnacion-label">Cmimi ne €: <div
-                                        className="garnacion-pdetails"><input type="number" name="itemPrice"
-                                                                              className="form-control" id="itemPrice"
-                                                                              defaultValue={itemPrice}/></div></label>
+                                        className="garnacion-pdetails"><input type="number" name="sold_price"
+                                                                              className="form-control" id="sold_price"
+                                                                              onChange={e => handleChangeGarantion(e)}
+                                                                              defaultValue={garantionValues.sold_price}/></div></label>
                                 </div>
                                 <div className="row garantion-inputs col-sm-12">
                                     <div className="form-group">
                                         <button type="button" className="btn btn-success" onClick={() => {
-                                            addToSalesTable(product);
+                                            // addToSalesTable(product);
                                             createAndDownloadPdf();
+                                            // onRemove(product);
                                         }}>Ruaj
                                         </button>
                                     </div>

@@ -87,9 +87,9 @@ function Reports() {
                     <td>{product.imei}</td>
                     <td>{product.date}</td>
                     <td>{product.garantion_date}</td>
-                    <td>{product.first_name + product.last_name}</td>
+                    <td>{product.first_name} {product.last_name}</td>
                     <td>{product.buyer || product.name_surname}</td>
-                    <td>{product.selled_price}</td>
+                    <td>{product.selled_price || product.selling_price}</td>
                     <td>Get Sales Username</td>
                     {/* <td>{product.category}</td> */}
                     <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete" onClick={() => removeSale(product._id)}><RiIcons.RiDeleteBin6Fill /></div></td>
