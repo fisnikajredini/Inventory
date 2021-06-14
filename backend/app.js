@@ -170,13 +170,13 @@ app.post("/product/add/person", (req, res) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send("internal server errorr");
+            res.status(500).send({msg:"internal server errorr", err:err});
         });
 });
 
 app.post("/product/delete/product", (req, res) => {
 
-    console.log("--"+JSON.stringify(req.body.id))
+    console.log("--"+JSON.stringify(req.body))
     queries.removeProduct(req.body.id)
         .then(() => {
             res.json({data: "Product Deleted Successfully"});
