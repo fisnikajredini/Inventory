@@ -195,7 +195,15 @@ app.post("/product/delete/product", (req, res) => {
 });
 
 app.post("/product/edit", (req, res) => {
-
+    console.log("--"+JSON.stringify(req.body))
+    queries.updateProduct(req.body.id)
+    .then(() => {
+        res.json({data: "Product Updated Successfully"});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send("internal server error");
+    })
 });
 
 app.post("/sales/delete/product", (req, res) => {

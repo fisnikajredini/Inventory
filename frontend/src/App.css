@@ -64,8 +64,9 @@ body {
   margin-top: 30px;
   align-items: center;
   width: 280px;
-  background-color: rgb(216, 216, 216);
-  border-radius: 10px;
+  background-color: #EAEAEA;
+  border-radius: 30px;
+  height: 50px;
 }
 .product-fields {
   padding-top: 30px;
@@ -97,7 +98,7 @@ body {
 }
 .sales .search-bar {
   margin-bottom: 15px;
-  border: 1px solid #01ced1;
+  border: 1px solid #6A82FB;
 }
 .exportButtonContainer {
   margin-bottom: 15px;
@@ -199,6 +200,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  background: #ececec;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
 }
 .company-b {
   display: flex;
@@ -206,11 +210,14 @@ body {
   justify-content: center;
   font-size: 16px;
   width: 140px;
-  height: 30px;
+  height: 40px;
   padding: 7px;
-  background: #005e5e;
-  border-radius: 10px;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 30px;
   color: #fff !important;
+  margin-left: 5px;
 }
 .company-b-2 {
   display: flex;
@@ -218,10 +225,11 @@ body {
   justify-content: center;
   font-size: 16px;
   width: 140px;
-  height: 30px;
+  height: 50px;
   padding: 7px;
-  border-radius: 10px;
+  border-radius: 30px;
   color: #15171c !important;
+  margin-left: 5px;
 }
 .company-b svg, .company-b-2 svg {
   margin-right: 7px;
@@ -239,27 +247,31 @@ body {
   padding: 7px;
   border-radius: 0 10px 10px 0;
   color:#15171c !important;
+  margin-right: 5px;
 }
 .person-b-2 {
   display: flex;
   align-items: center;
   font-size: 16px;
   width: 140px;
-  height: 30px;
+  height: 40px;
   text-align: left;
   padding: 7px;
-  border-radius: 10px;
-  background: #005e5e;
+  border-radius: 30px;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff !important;
+  margin-right: 5px;
 }
 .person-b svg, .person-b-2 svg {
   margin-right: 7px;
 }
 .form-control:focus {
-  box-shadow: 0 0 0 0.2rem hsla(180, 100%, 18%, 0.25) !important;
+  box-shadow: 0 0 0 0.2rem hsla(256, 100%, 50%, 0.411) !important;
 }
 .form-control {
-  background-color: #f2f2f2 !important;
+  /* background-color: #f2f2f2 !important; */
 }
 .SidebarNav {
   background: #15171c;
@@ -305,18 +317,22 @@ body {
   font-size: 16px;
 }
 .SidebarLink svg {
-  color: #01ced1;
+  color: #FC5C7D;
 }
 
 .SidebarLink:hover {
-  background: #252831;
-  border-left: 4px solid #01ced1;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-left: 4px solid #FC5C7D;
   cursor: pointer;
 }
 
 .SidebarNav #active {
-  background: #202229;
-  border-left: 4px solid #01ced1;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-left: 4px solid #FC5C7D;
   cursor: pointer;
 }
 
@@ -325,7 +341,7 @@ body {
 }
 
 .DropdownLink {
-  background: #252831;
+  background: #20232b;
   height: 40px;
   padding-left: 3rem;
   display: flex;
@@ -336,20 +352,14 @@ body {
 }
 
 .DropdownLink svg {
-  color: #01ced1;
+  color: #FC5C7D;
 }
 
 .DropdownLink:hover {
-  background: #005e5e;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   cursor: pointer;
-}
-.footer {
-  left: 0;
-  bottom: 0;
-  margin-left: 60px;
-  position: fixed;
-  color: white;
-  font-size: 12px;
 }
 .sales-tab {
   position: fixed;
@@ -433,7 +443,7 @@ body {
 .garnacion-label {
   width: 100%;
   font-size: 18px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #6A82FB;
   padding-bottom: 10px;
   color: rgb(90, 90, 90);
 }
@@ -444,9 +454,13 @@ body {
 .title {
   padding-left: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid grey;
   font-weight: 800;
-  color: #004b4b;
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .garantion-inputs {

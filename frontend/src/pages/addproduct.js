@@ -122,10 +122,10 @@ function Addproduct() {
             productImei: '',
             productCategory: 'Celular',
             productDate: date,
-            productPartner: inputFields.productPartner,
+            productPartner: inputFields[0].productPartner,
             productBuyPrice: '',
             productSellPrice: '',
-            productRecieptNumber: inputFields.productRecieptNumber
+            productRecieptNumber: inputFields[0].productRecieptNumber
         }])
     }
     //Function to remove the fields

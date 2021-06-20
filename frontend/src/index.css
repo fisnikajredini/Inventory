@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 0.9rem !important;
 }
 
 code {
@@ -39,7 +40,9 @@ form:after {
   right: 0px;
   bottom: 0px;
   z-index: 1;
-  background-image: linear-gradient(to bottom right, #01ced1, #005e5e);
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 form .form-inner {
   position: relative;
@@ -71,7 +74,7 @@ form .form-inner .form-group {
 }
 
 .form-inner .form-group:focus-within label {
-  color: #01ced1;
+  color: #6A82FB;
 }
 
 form .form-inner .form-group input {
@@ -91,7 +94,9 @@ form .form-inner input[type="submit"] {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
-  background-image: linear-gradient(to right, #005e5e, #005e5e 50%, #01ced1);
+  background: #FC5C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: 200%;
   background-position: 0%;
   transition: 0.4s;

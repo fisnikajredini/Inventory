@@ -8,11 +8,17 @@ import SidebarSubM from './SidebarSubM';
 import logo from '../logo.png'
 
 const Nav = styled.div`
-  background: #15171c;
+background: #FC5C7D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 80px;
+  width 100%;
+  position: fixed;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  top: 0;
+  z-index: 9
 `;
 
 const NavIcon = styled(Link)`
@@ -22,9 +28,9 @@ const NavIcon = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: #01ced1;
+  color: #fff;
   &:hover{
-      color: #fff;
+      color: #FC5C7D;
   }
 `;
 
@@ -39,12 +45,21 @@ const SidebarNav = styled.nav`
 const SidebarWrap = styled.div`
   width: 100%;
 `;
-
+const Footer = styled.div`
+    bottom: 0;
+    margin-left: 60px;
+    position: fixed;
+    color: white;
+    font-size: 12px;
+`
 
 const Sidebar = () => {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
+    function refreshPage() {
+        window.location.reload(false);
+      }
     return (
         <>
         <Nav>
@@ -63,13 +78,13 @@ const Sidebar = () => {
                     </div>
                     <div className="profile-name">
                         Irfan Ferati
-                    </div> <button class="btn btn-danger mt05">Log Out</button>
+                    </div> <button class="btn btn-danger mt05" onClick={refreshPage}>Log Out</button>
                 </div>
                 {SidebarData.map((item, index) => {
                     return <SidebarSubM item={item} key={index}  />;
                 })}
             </SidebarWrap>
-            <div className="footer"><p>Powered by 2BMedia</p></div>
+            <Footer><p>Powered by 2BMedia</p></Footer>
         </SidebarNav>
         </>
     );

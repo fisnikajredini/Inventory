@@ -1,6 +1,6 @@
-module.exports = ({ gar, cart_items, firstName, lastName, garantionDate, product_name, imei }) => {
-    const today = new Date();
-return `
+module.exports = ({ gar, cart_items, firstName, lastName, garantionDate, product_name, imei, logo }) => {
+   const today = new Date();
+   return `
 <!doctype html>
     <html>
        <head>
@@ -90,7 +90,7 @@ return `
                    <td colspan="2">
                       <table>
                          <tr>
-                            <td class="title"><img  src="https://scontent.fskp4-2.fna.fbcdn.net/v/t1.18169-9/10885499_511372365670105_7241831550566325600_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=PXzuNS6pUf0AX870j2i&_nc_ht=scontent.fskp4-2.fna&oh=3249e634e346d09b8e5960dc3d97cf2b&oe=60CA9783"
+                            <td class="title"><img  src="http://5guardian.store/wp-content/uploads/2021/06/logo.png"
                                style="width:100%; max-width:100px;"></td>
                             <td>
                                Data: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}`} <br/>
@@ -137,10 +137,20 @@ return `
                             <td>
                               <strong> Garancioni vlen deri: ${gar.garantionDate}</strong>
                             </td>
-                            <td>
-                            </td>
                          </tr>
                       </table>
+                      <br/>
+                      <ul class="item">
+                 <li>Garantniot rok na proizvodot e 12 meseci od datumot naveden vo garantniot list.</li>
+                 <li>Dopolnitelnata oprema *baterija, polnaci, kabli, slusalka, ne podelexi na garancija.</li>
+                 <li>Softverski instalacija ne podelezhat na garancija.</li>
+                 <li>Garancija ne vazhi vo slucaj na oshtetuvana predizvik od mehaniko ili termiko oshtetuvane od elikricen udar od grom, pozhardozhd, blaga.</li>
+                 <li>Garancija ne vazhi se zabelezhat bilo kakvi izmeni, prepravki ili falsifikuvana.</li>
+                 <li>Garancija ne vazhi dokolku korisnikot instalira softver koj e neovlasten od strana na proizvoditelot.</li>
+                 <li>Garancijata prestanuva da vazi dokolku uredot bil servisiran vo drug servis.</li>
+                 <li>Vo slucaj na defekt na proizvodot od strana na izdavacot vo rok od 30 dena od denot na podnesuvanje na reklamacijata defektot treba da bide ostranet dokolku defektot ne moze da se ostrani vo ovaj period proizvodot treba da se zameni so drug proizvod.</li>
+                 <li>Klijentot se obvrzuva da gi ispolni uslovite na garancijata da rakuva pravilno so uredot i ke go upotreba isklucivo spored upatstvata dadeni of proizvoditelot.</li>
+             </ul>
                    </td>
                 </tr>
              <br />

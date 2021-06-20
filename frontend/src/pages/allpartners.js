@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as RiIcons from 'react-icons/ri';
+import * as FiIcons from 'react-icons/fi';
 import axios from 'axios';
 import Swal from "sweetalert2";
 
@@ -72,7 +71,7 @@ function Allpartners() {
                     <tr>
                     <td>{partner.company_name}</td>
                     <td>{partner.phone_number}</td> 
-                    <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete" onClick={() => removePartner(partner._id)}><RiIcons.RiDeleteBin6Fill /></div></td>
+                    <td className="edit-delete"><div className="edit"><FiIcons.FiEdit2 /></div><div className="delete" onClick={() => removePartner(partner._id)}><FiIcons.FiTrash /></div></td>
                     </tr>
                 </tbody>
                 ))}

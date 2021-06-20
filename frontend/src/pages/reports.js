@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as RiIcons from 'react-icons/ri';
+import * as FiIcons from 'react-icons/fi';
 import axios from 'axios';
 import Swal from "sweetalert2";
 
@@ -92,7 +93,7 @@ function Reports() {
                     <td>{product.selled_price || product.selling_price}</td>
                     <td>Get Sales Username</td>
                     {/* <td>{product.category}</td> */}
-                    <td className="edit-delete"><div className="edit"><FaIcons.FaEdit /></div><div className="delete" onClick={() => removeSale(product._id)}><RiIcons.RiDeleteBin6Fill /></div></td>
+                    <td className="edit-delete"><div className="edit"><RiIcons.RiArrowGoBackFill /></div><div className="delete" onClick={() => removeSale(product._id)}><FiIcons.FiTrash /></div></td>
                     </tr>
                 </tbody>
                 )}
