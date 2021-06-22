@@ -195,9 +195,15 @@ app.post("/product/delete/product", (req, res) => {
 });
 
 app.post("/product/edit", (req, res) => {
+
     console.log("--"+JSON.stringify(req.body))
-    queries.updateProduct(req.body.id)
+
+    let changes = req.body
+     console.log( changes._id)
+
+    queries.updateProduct(req.body._id, changes)
     .then(() => {
+        console.log("updated succesfully")
         res.json({data: "Product Updated Successfully"});
     })
     .catch((err) => {

@@ -18,6 +18,15 @@ function Products() {
     const showEditProduct = () => setEditProduct(!editproduct);
     const [editItem, setEditItem] = useState([]);
 
+    const [inputFields, setInputFields] = useState([{
+        productName: '',
+        productImei: '',
+        productDate: '',
+        productBuyPrice: '',
+        productSellPrice: '',
+        productRecieptNumber: ''
+    }]);
+
     useEffect(() => {
         axios.get('/products/get').then(res => {
             // partners = data.data.data
@@ -45,13 +54,15 @@ function Products() {
             denyButtonText: `JO`,
         }).then((result) => {
             if (result.isConfirmed) {
-                const exist = editItem.find(x => x.id === product._id);
+                const exist = editItem.find(x => x.id === product.id);
                 if (exist) {
                     setEditItem(editItem.map(x => x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
                     )
                     );
+                    console.log(editItem)
                 } else {
                     setEditItem([...editItem, { ...product, qty: 1 }]);
+                    console.log(editItem)
                 }
             } else if (result.isDenied) {
                 Swal.fire("Produkti nuk u selektua!", "", "error");
@@ -161,20 +172,25 @@ function Products() {
         }
     }
 
-    function updateProduct(product) {
-        let inputs = products;
-        inputs[0].product_name = product.product_name;
-        inputs[0].imei = product.imei;
-        inputs[0].date = product.date;
-        inputs[0].facture_number = product.facture_number;
-        inputs[0].buying_price = product.buying_price;
-        inputs[0].selling_price = product.selling_price;
-
-        axios.post('/product/edit', inputs)
-        .then(console.log(inputs[0]))
+    function updateProduct(id) {
+        let route = '/product/edit';
+        axios.post(route, {
+            product_name: inputFields[0].productName,
+            imei: inputFields[0].productImei,
+            date: inputFields[0].productDate,
+            buying_price: inputFields[0].productBuyPrice,
+            selling_price: inputFields[0].productSellPrice,
+            facture_number: inputFields[0].productRecieptNumber,
+        })
+        .then(console.log(inputFields[0]))
         .catch(err => {
             console.log(err)
         })
+    }
+    const handleChangeInput = (index, event) => {
+        const values = [...inputFields];
+        values[index][event.target.name] = event.target.value;
+        setInputFields(values);
     }
 
     return (
@@ -247,30 +263,31 @@ function Products() {
                             <div className="form-group">
                                 <h3 className="title pt-2">Ndrysho produktin:</h3>
                             </div>
-                            <div>
+                            {inputFields.map((inputField, index) => (
+                            <div key={index}>
                                 <div className="row garantion-inputs col-sm-12">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <label for="tabel" className="form-label">Emri i Produktit</label>
-                                            <input type="input" required name="productName" defaultValue={product.product_name} className="form-control" aria-describedby="emri-produktit"></input>
+                                            <label for="tabel" className="form-label">{product._id}</label>
+                                            <input type="input" required name="productName" value={inputField.productName} onChange={event => handleChangeInput(index, event)}className="form-control" aria-describedby="emri-produktit"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                             <label for="tabel" className="form-label">IMEI</label>
-                                            <input type="number" name="productImei" maxLength="15" onInput={maxLengthCheck} defaultValue={product.imei} className="form-control small-input" aria-describedby="imei"></input>
+                                            <input type="number" name="productImei" maxLength="15" onInput={maxLengthCheck} value={inputField.productImei} onChange={event => handleChangeInput(index, event)}className="form-control small-input" aria-describedby="imei"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                             <label for="tabel" className="form-label">Data</label>
-                                            <input type="date" className="form-control" name="productDate" defaultValue={product.date} aria-describedby="emri-produktit"></input>
+                                            <input type="date" className="form-control" name="productDate" value={inputField.productDate} onChange={event => handleChangeInput(index, event)} aria-describedby="emri-produktit"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                             <label for="tabel" className="form-label">Nr. fakturës</label>
-                                            <input type="text" className="form-control" name="productRecieptNumber" defaultValue={product.facture_number || product.id_number} aria-describedby="imei"></input>
+                                            <input type="text" className="form-control" name="productRecieptNumber" value={inputField.productRecieptNumber} onChange={event => handleChangeInput(index, event)}aria-describedby="imei"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -279,7 +296,7 @@ function Products() {
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">€</div>
                                             </div>
-                                            <input type="number" class="form-control" id="inlineFormInputGroup" defaultValue={product.buying_price} name="productBuyPrice" aria-describedby="shifra"></input>
+                                            <input type="number" class="form-control" id="inlineFormInputGroup"  value={inputField.productBuyPrice} onChange={event => handleChangeInput(index, event)}  name="productBuyPrice" aria-describedby="shifra"></input>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -288,15 +305,16 @@ function Products() {
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">€</div>
                                             </div>
-                                            <input type="number" class="form-control" id="inlineFormInputGroup" defaultValue={product.selling_price} name="productSellPrice" aria-describedby="emri-produktit"></input>
+                                            <input type="number" class="form-control" id="inlineFormInputGroup" value={inputField.productSellPrice} onChange={event => handleChangeInput(index, event)} name="productSellPrice" aria-describedby="emri-produktit"></input>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            ))}
                             <div className="row garantion-inputs col-sm-12">
                                 <div className="form-group">
                                     <button type="button" className="btn btn-success" onClick={() => {
-                                        updateProduct(product);
+                                        updateProduct(product.id);
                                         onRemove(product);
                                         showEditProduct();
                                     }}>Ruaj ndryshimet</button>

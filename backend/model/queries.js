@@ -125,11 +125,13 @@ const removeProduct = (id) => {
 };
 
 const updateProduct = (id, data) => {
+    console.log(id)
     return new Promise((success, fail) => {
-        Products.updateOne({ _id: id }, data, (err) => {
+        Products.updateOne({ _id: id }, data, (err,suc) => {
             if (err) {
                 return fail();
             }
+            console.log("----11----", suc)
             return success();
         });
     });

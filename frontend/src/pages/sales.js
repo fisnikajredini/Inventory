@@ -57,11 +57,13 @@ function Sales() {
             if (result.isConfirmed) {
                 const exist = cartItems.find(x => x.id === product._id);
                 if (exist) {
-                    setCartItems(cartItems.map(x => x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+                    setCartItems(cartItems.map(x => x.id === product._id ? { ...exist, qty: exist.qty + 1 } : x
                     )
                     );
+                    console.log(cartItems)
                 } else {
                     setCartItems([...cartItems, { ...product, qty: 1 }]);
+                    
                 }
             } else if (result.isDenied) {
                 Swal.fire("Produkti nuk u selektua!", "", "error");
@@ -86,7 +88,7 @@ function Sales() {
     useEffect(() => {
         axios.get('/products/get').then(res => {
             // partners = data.data.data
-            console.log(res.data.data)
+            // console.log(res.data.data)
             // setProducts(res.data.data)
         })
             .catch(err => {
@@ -113,7 +115,7 @@ function Sales() {
         let route = '/products/get/byimei';
         axios.post(route, { imei: event }).then(data => {
             if (data.data.data !== null) {
-                console.log(data.data.data);
+                // console.log(data.data.data);
                 setProducts([data.data.data]);
             }
         })
@@ -122,7 +124,7 @@ function Sales() {
     function getByNameProduct(event) {
         let route = '/products/get/byname';
         axios.post(route, { name: event }).then(data => {
-            console.log(data.data.data);
+            // console.log(data.data.data);
             setProducts(data.data.data);
         })
     }
@@ -153,7 +155,7 @@ function Sales() {
         const values = { ...garantionValues };
         values[e.target.name] = e.target.value;
         setGarantionValues(values);
-        console.log(values)
+        // console.log(values)
 
     }
 
@@ -206,7 +208,7 @@ function Sales() {
                             <th scope="col">Shite produktin</th>
                         </tr>
                     </thead>
-                    {console.log(products)}
+                    {/* {console.log(products)} */}
                     {products.map((product, key) =>
                         <tbody>
                             <tr>
