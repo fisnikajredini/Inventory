@@ -50,6 +50,13 @@ module.exports = ({ pro }) => {
           justify-content: center;
           align-items: center;
         }
+        .title {
+          font-size:16px;
+          padding-bottom:5px;
+        }
+        .price {
+          font-size: 14px;
+        }
          </style>
       </head>
       <body>
@@ -58,7 +65,7 @@ module.exports = ({ pro }) => {
               <div class="grid-item">
                   <div class="text-center">
                     <div class="title">${product.product_name.toUpperCase()}</div>
-                    <div class="price">${product.selling_price * 61.5}</div>
+                    <div class="price">${product.selling_price * 61.5} MKD (${product.selling_price}€)</div>
                     <svg>${svgText}</svg>
                   </div>
               </div>
