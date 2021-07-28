@@ -3,7 +3,7 @@ module.exports = ({ gar, cart_items, firstName, lastName, garantionDate, product
    return `
    <!doctype html>
    <html>
-      <head>
+      <head> 
          <meta charset="utf-8">
          <title>Garantion</title>
          <style>
