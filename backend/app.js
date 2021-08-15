@@ -143,7 +143,22 @@ app.post("/partners/delete/partner", (req, res) => {
 });
 
 app.post("/partners/edit", (req, res) => {
-    queries.updatePartner()
+
+
+    console.log("--"+JSON.stringify(req.body))
+
+    let changes = req.body.fields
+     console.log( changes)
+
+    queries.updatePartner(req.body.id, changes)
+    .then(() => {
+        console.log("updated succesfully")
+        res.json({data: "Partner Updated Successfully"});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send("internal server error");
+    })
 });
 
 app.get("/partners/get", (req, res) => {

@@ -21,6 +21,11 @@ function Allpartners() {
         // });
     }, []);
 
+    function updatePartner(){
+        
+        axios.post('/partners/edit',)
+    }
+
     function removePartner(id) {
         Swal.fire({
           title:
