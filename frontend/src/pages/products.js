@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled2 from 'styled-components';
+import { styled } from '@mui/material/styles';
 import * as FiIcons from 'react-icons/fi';
+import * as AiIcons from 'react-icons/ai';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
-const EditProduct = styled.nav`
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+const EditProduct = styled2.nav`
   right: ${({ editproduct }) => (editproduct ? '0px' : '-100%')};
   transition: 100ms;
   z-index: 11;
@@ -265,8 +287,14 @@ function Products() {
             <div className='sales pt2' onEdit={onEdit}>
                 <div className="row col-sm-12">
                     <div className="col-sm-3">
+                    <FormGroup className="flex-row">
+                        <FormControlLabel control={ <Switch onChange={handleColums2} name="gilad" size="small" /> } label="Nr. Kontaktit"/>
+                        <FormControlLabel control={ <Switch onChange={handleColums} name="gilad" size="small" /> } label="Nr. Faktures"/>
+                        <FormControlLabel control={ <Switch onChange={handleColums3} name="gilad" size="small" /> } label="Edit/Delete"/>
+                        <FormControlLabel control={ <Switch onChange={handleColums4} name="gilad" size="small" /> } label="Çmimi blerës"/>
+                    </FormGroup>
                         
-                    <div class="form-check form-check-inline">
+                    {/* <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" onChange={handleColums2}></input>
                             <label class="form-check-label" for="inlineCheckbox1">Nr. Kontaktit</label>
                         </div>
@@ -281,19 +309,65 @@ function Products() {
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2" onChange={handleColums4}></input>
                             <label class="form-check-label" for="inlineCheckbox2">Çmimi blerës</label>
-                        </div>
-                    </div>
+                    </div> */}
+                    </div> 
                     <div className="col-sm-9">
-                        <input
+                        <div class="searchBox">
+                            <input class="searchInput" type="text" name="" placeholder="Search" value={text} onChange={(e) => onChangeText(e.target.value)}/>
+                            <button class="searchButton" href="#">
+                            <AiIcons.AiOutlineSearch />
+                            </button>
+                        </div>
+                        {/* <input
                              value={text}
                              type="text"
                              id="myInput"
                              className="form-control search-bar"
                              placeholder="Kërko paisjen..."
-                             onChange={(e) => onChangeText(e.target.value)} />
+                             onChange={(e) => onChangeText(e.target.value)} /> */}
                     </div>
                 </div>
-                <table class="table table-hover table-sm">
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                        <TableHead>
+                        <TableRow className="table-head">
+                            <StyledTableCell>Emri produktit</StyledTableCell>
+                            <StyledTableCell align="right">IMEI</StyledTableCell>
+                            <StyledTableCell align="right">Data</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked4}>Çmimi blerës</StyledTableCell>
+                            <StyledTableCell align="right">Çmimi shitës</StyledTableCell>
+                            <StyledTableCell align="right">Partneri / Personi</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked}>Nr. Fakturës / Nr. ID</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked2}>Nr. Kontakti</StyledTableCell>
+                            <StyledTableCell align="right">Kategoria</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked3}>Edit / Delete</StyledTableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody className="table-data">
+                        {productsMatch && [...productsMatch].reverse().map((product, id) => (
+                            <TableRow
+                            key={product._id}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                            <StyledTableCell component="th" scope="row">{product.product_name}</StyledTableCell>
+                            <StyledTableCell align="right">{product.imei}</StyledTableCell>
+                            <StyledTableCell align="right">{product.date}</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked4}>{product.buying_price}</StyledTableCell>
+                            <StyledTableCell align="right">{product.selling_price}</StyledTableCell>
+                            <StyledTableCell align="right">{product.buyer || product.name_surname}</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked}>{product.facture_number || product.id_number}</StyledTableCell>
+                            <StyledTableCell align="right" hidden={checked2}>{product.tel_num || "Partner"}</StyledTableCell>
+                            <StyledTableCell align="right">{product.category}</StyledTableCell>
+                            <StyledTableCell className="edit-delete" hidden={checked3}><div className="edit" onClick={() => {
+                                onEdit(product);
+                                showEditProduct();
+                            }}><FiIcons.FiEdit2 /></div><div className="delete" onClick={() => removeProduct(product._id)}><FiIcons.FiTrash /></div></StyledTableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                {/* <table class="table table-hover table-sm">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Emri produktit</th>
@@ -341,7 +415,7 @@ function Products() {
                             <td hidden={checked3}></td>
                         </tr>
                     </tfoot>
-                </table>
+                </table> */}
             </div>
             <EditProduct editproduct={editproduct} className="garantion-form">
                 {editItem.map((product, idx) => (

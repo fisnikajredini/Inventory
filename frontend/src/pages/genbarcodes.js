@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
+import * as AiIcons from 'react-icons/ai';
+import Button from '@mui/material/Button';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import { saveAs } from 'file-saver';
@@ -85,31 +87,39 @@ function GenBarcodes() {
     return (
         <>
             <div className="page-name">
-                <h3>Paisjet në dispozicion</h3>
+                <h3>Gjenero Barkode</h3>
             </div>
             <div className='sales pt2'>
-                <div className="row col-sm-12">
-                    <div className="col-sm-3 checkboxes">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" onChange={handleColums2}></input>
-                            <label class="form-check-label" for="inlineCheckbox1">Nr. Kontaktit</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" onChange={handleColums}></input>
-                            <label class="form-check-label" for="inlineCheckbox2">Nr. Faktures</label>
+                <div className="row col-sm-12 p2 top-header">
+                    <div className="col-sm-9">
+                        <div class="searchBox">
+                            <input class="searchInput" type="text" name="" placeholder="Search" value={text} onChange={(e) => onChangeText(e.target.value)}/>
+                            <button class="searchButton" href="#">
+                            <AiIcons.AiOutlineSearch />
+                            </button>
                         </div>
                     </div>
-                    <div className="col-sm-9">
-                        <input
-                            value={text}
-                            type="text"
-                            id="myInput"
-                            className="form-control search-bar"
-                            placeholder="Kërko paisjen..."
-                            onChange={(e) => onChangeText(e.target.value)} />
+                        <div className="col-sm-3 checkboxes">
+                            <div className="align-btn-center">
+                                <Button className="brcd-btn" variant="outlined" onClick={() => { createAndDownloadBarcode(); }} endIcon={<AiIcons.AiOutlineBarcode />}>
+                                Gjenero Barcode
+                                </Button>
+                                {/* <button type="button" class="btn btn-primary" onClick={() => { createAndDownloadBarcode(); }}>Gjenero Barcode</button> */}
+                            </div>
                     </div>
                 </div>
-                <table class="table table-hover table-sm">
+
+                    <div class="main-container row col-sm-12" > 
+                        {productsMatch && [...productsMatch].reverse().map((product, id) => (
+                        <div class="main-row col-sm-4" key={product._id}>
+                                <div className="prod-name" >{product.product_name.toUpperCase()}</div>
+                                <div className="price">{product.selling_price * 61.5} MKD ({product.selling_price}€)</div>
+                                <Barcode value={product.imei} displayValue={true} height={35} width={1.5}/>
+                                {/* <svg>{product.svgText}</svg> */}
+                        </div>
+                    ))}
+                    </div>
+                {/* <table class="table table-hover table-sm">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Emri produktit</th>
@@ -138,10 +148,8 @@ function GenBarcodes() {
                             </tr>
                         </tbody>
                     ))}
-                </table>
-                <div className="align-btn-center p2">
-                    <button type="button" class="btn btn-primary" onClick={() => { createAndDownloadBarcode(); }}>Gjenero Barcode</button>
-                </div>
+                </table> */}
+                
             </div>
 
         </>
