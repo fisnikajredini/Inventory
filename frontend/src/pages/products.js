@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled2 from 'styled-components';
 import { styled } from '@mui/material/styles';
 import * as FiIcons from 'react-icons/fi';
 import * as AiIcons from 'react-icons/ai';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -119,7 +120,7 @@ function Products() {
         if (text.length > 0) {
             matches = products.filter((product) => {
                 const regex = new RegExp(`${text}`, "gi");
-                return product.product_name.match(regex) || product.imei.toString().match(regex) || (product.buyer == null ? product.name_surname.match(regex) : product.buyer.match(regex)) || (product.facture_number == null ? product.id_number.match(regex) : product.facture_number.match(regex));
+                return product.product_name.match(regex) || product.date.toString().match(regex) || product.imei.toString().match(regex) || (product.buyer == null ? product.name_surname.match(regex) : product.buyer.match(regex)) || (product.facture_number == null ? product.id_number.match(regex) : product.facture_number.match(regex));
             });
         } else {
             matches = products.filter((product) => {
@@ -154,8 +155,8 @@ function Products() {
                 axios.post(route, { id: id }).then(data => {
                     axios.get('/products/get').then(res => {
                         // partners = data.data.data
-                        console.log(res.data.data)
-                        setProducts(res.data.data);
+                        setProducts(res.data.data)
+                        setProductMatch(res.data.data)
                     })
                         .catch(err => {
                             console.log(err)
@@ -164,7 +165,13 @@ function Products() {
                     .catch(err => {
                         console.log(err)
                     })
-                Swal.fire("Produkti u fshi!", "", "success").then();
+                Swal.fire({
+                    icon: "success",
+                    confirmButtonText: `OK`,
+                    title: "Produkti u fshi!",
+                    showConfirmButton: true,
+                    timer: 1500,
+                }).then();
             } else if (result.isDenied) {
                 Swal.fire("Produkti nuk u fshi!", "", "error");
             }
@@ -273,7 +280,17 @@ function Products() {
             }
         }
         axios.post('/product/edit', changed_inputs)
-            .then(console.log(inputFields[0]))
+            .then(() => {
+                axios.get('/products/get').then(res => {
+                    // partners = data.data.data
+                    console.log(res.data.data)
+                    setProducts(res.data.data)
+                    setProductMatch(res.data.data)
+                }).then()
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
             .catch(err => {
                 console.log(err)
             })
@@ -420,10 +437,10 @@ function Products() {
             <EditProduct editproduct={editproduct} className="garantion-form">
                 {editItem.map((product, idx) => (
                     <>
-                        <div className="close-form" onClick={() => {
-                            onRemove(product);
-                            showEditProduct();
-                        }}>X</div>
+                    <div className="close-form" onClick={() => {
+                        onRemove(product);
+                        showEditProduct();
+                    }}>X</div>
                         <div className="popup-form" key={idx}>
                             <div className="form-group">
                                 <h3 className="title pt-2">Ndrysho produktin:</h3>
@@ -554,11 +571,17 @@ function Products() {
                             ))}
                             <div className="row garantion-inputs col-sm-12">
                                 <div className="form-group">
-                                    <button type="button" className="btn btn-success" onClick={() => {
+                                <Button variant="contained" 
+                                    onClick={() => {
                                         updateProduct(product);
                                         onRemove(product);
                                         showEditProduct();
-                                    }}>Ruaj ndryshimet</button>
+                                    }} >Ruaj ndryshimet</Button>
+                                    {/* <button type="button" className="btn btn-success" onClick={() => {
+                                        updateProduct(product);
+                                        onRemove(product);
+                                        showEditProduct();
+                                    }}>Ruaj ndryshimet</button> */}
                                 </div>
                             </div>
                         </div>

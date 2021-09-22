@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Sidebar from './Components/Sidebar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import LoginForm from './Components/LoginForm';
 import sales from './pages/sales';
 import reports from './pages/reports';
@@ -15,6 +15,7 @@ import addproduct_p from './pages/addproduct_p';
 import allpartners from './pages/allpartners';
 import terms from './pages/terms';
 import newuser from './pages/newuser';
+import factures from './pages/factures';
 import axios from 'axios';
 import genbarcodes from './pages/genbarcodes';
 
@@ -62,6 +63,9 @@ function App() {
              <Router>
           <Sidebar />
           <Switch>
+          <Route exact path="/" render={() => (
+                <Redirect to="/sales"/>
+            )}/>
             <Route path="/sales" exact component={sales} />
             <Route path="/reports" exact component={reports} />
             <Route path="/information" exact component={information} />
@@ -70,6 +74,7 @@ function App() {
             <Route path="/account" exact component={account} />
             <Route path="/settings" exact component={settings} />
             <Route path="/addproduct" exact component={addproduct} />
+            <Route path="/factures" exact component={factures} />
             <Route path="/addproduct-p" exact component={addproduct_p} />
             <Route path="/addpartner" exact component={addpartner} />
             <Route path="/allpartners" exact component={allpartners} />

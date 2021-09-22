@@ -75,7 +75,7 @@ const Products = mongoose.model(
     'Products',
     {
         product_name: String,
-        imei: { type: Number, unique: true },
+        imei: { type: String, unique: true },
         category: String,
         date: Date,
         buyer: String,
@@ -84,7 +84,7 @@ const Products = mongoose.model(
         facture_number: String,
         name_surname: String,
         tel_num: Number,
-        id_number: String
+        id_number: String,
     },
     'Products'
 );
@@ -325,6 +325,78 @@ const getByEmailSale = (email) => {
     });
 }
 
+
+
+
+
+const Factures = mongoose.model(
+    'Factures',
+    {
+        facture_id: String,
+        facture_date: Date,
+        facture_price: Number,
+        facture_payment: Number,
+        facture_issuer: String
+    },
+    'Factures'
+);
+
+const readAllFacture = () => {
+    return new Promise((success, fail) => {
+        Factures.find({}, (err, data) => {
+            if (err) {
+                return fail();
+            }
+            return success(data);
+        });
+    });
+};
+
+const createNewFacture = (data) => {
+    return new Promise((success, fail) => {
+        let p = new Factures(data);
+        p.save((err) => {
+            if (err) {
+                return fail();
+            }
+            return success();
+        });
+    });
+};
+
+const removeFacture = (id) => {
+    return new Promise((success, fail) => {
+        Factures.deleteOne({ _id: id }, (err) => {
+            if (err) {
+                return fail();
+            }
+            return success();
+        });
+    });
+};
+
+const updateFacture = (id, data) => {
+    return new Promise((success, fail) => {
+        Factures.updateOne({ _id: id }, data, (err) => {
+            if (err) {
+                return fail();
+            }
+            return success();
+        });
+    });
+};
+
+const getByEmailFacture = (email) => {
+    return new Promise((success, fail) => {
+        Factures.findOne({ email: email }, (err, data) => {
+            if (err) {
+                return fail(err);
+            }
+            return success(data);
+        })
+    });
+}
+
 module.exports = {
     Users,
     readAllUsers,
@@ -353,4 +425,10 @@ module.exports = {
     removeSale,
     updateSale,
     getByEmailSale,
+    Factures,
+    readAllFacture,
+    createNewFacture,
+    removeFacture,
+    updateFacture,
+    getByEmailFacture,
 };

@@ -1,21 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-// import * as FaIcons from 'react-icons/fa';
+import styled2 from 'styled-components';
+import { styled } from '@mui/material/styles';
+import * as AiIcons from 'react-icons/ai';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import { saveAs } from 'file-saver';
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 // import logo from '../logo.png'
 // import * as AiIcons from 'react-icons/ai';
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
 
-const RightbarNav = styled.nav`
+
+const RightbarNav = styled2.nav`
   right: ${({ rightbar }) => (rightbar ? '16px' : '-100%')};
   transition: 350ms;
   z-index: 10;
   height: 800px;
 `;
 
-const GarantionForm = styled.nav`
+const GarantionForm = styled2.nav`
   right: ${({ garantionform }) => (garantionform ? '0px' : '-100%')};
   transition: 100ms;
   z-index: 11;
@@ -75,6 +94,7 @@ function Sales() {
             )
             );
         }
+        setGarantionValues('')
     }
 
     // const itemPrice = cartItems.reduce((a, c) => a + c.selling_price * c.qty, 0);
@@ -157,7 +177,15 @@ function Sales() {
 
         axios.post('/sales/add', inputs)
             .then(
-                axios.post('/product/delete/product', { id: id_to_del }).then()
+                axios.post('/product/delete/product', { id: id_to_del }).then(() => {
+                    axios.get('/products/get').then(res => {
+                        // partners = data.data.data
+                        // console.log(res.data.data)
+                        setProducts(res.data.data)
+                        setText('')
+                        setProductMatch('')
+                    })
+                })
                     .catch(err => {
                         console.log(err)
                     })
@@ -194,11 +222,7 @@ function Sales() {
                 {/* <div className="cashier" onClick={showRightbar}><FaIcons.FaCashRegister /></div> */}
             </div>
             <div className='sales pt2' onAdd={onAdd}>
-                <div className="row col-sm-12">
-                    <div className="col-sm-3">
-
-                    </div>
-                    <div className="col-sm-9">
+                <div className="row col-sm-12 search-place">
                         <input
                             value={text}
                             type="text"
@@ -206,39 +230,49 @@ function Sales() {
                             className="form-control search-bar"
                             placeholder="Kërko paisjen..."
                             onChange={(e) => onChangeText(e.target.value)} />
-                    </div>
+                            <div className="search-icon">
+                            <AiIcons.AiOutlineSearch />
+                            </div>
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Emri produktit</th>
-                            <th scope="col">IMEI</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Partneri</th>
-                            <th scope="col">Çmimi</th>
-                            <th scope="col">Shite produktin</th>
-                        </tr>
-                    </thead>
-                    {/* {console.log(products)} */}
-                    {productsMatch && [...productsMatch].reverse().map((product, id) => (
-                        <tbody>
-                            <tr>
-                                <td>{product.product_name}</td>
-                                <td>{product.imei}</td>
-                                <td>{product.date}</td>
-                                <td>{product.buyer}</td>
-                                <td>{product.selling_price}</td>
-                                <td>
-                                    <button onClick={() => {
-                                        onAdd(product);
-                                        showgarantionform();
-                                    }} className="btn btn-success">Add To Cart
-                                </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    ))}
-                </table>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow className="table-head">
+                                <StyledTableCell>Emri produktit</StyledTableCell>
+                                <StyledTableCell align="right">IMEI</StyledTableCell>
+                                <StyledTableCell align="right">Data</StyledTableCell>
+                                <StyledTableCell align="right">Partneri</StyledTableCell>
+                                <StyledTableCell align="right">Çmimi</StyledTableCell>
+                                <StyledTableCell align="right">Shite produktin</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody className="table-data">
+                        {/* {console.log(products)} */}
+                            {productsMatch && [...productsMatch].reverse().map((product, id) => (
+                                <TableRow
+                                key={product._id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                        <StyledTableCell>{product.product_name}</StyledTableCell>
+                                        <StyledTableCell align="right">{product.imei}</StyledTableCell>
+                                        <StyledTableCell align="right">{product.date}</StyledTableCell>
+                                        <StyledTableCell align="right">{product.buyer || product.name_surname}</StyledTableCell>
+                                        <StyledTableCell align="right">{product.selling_price}</StyledTableCell>
+                                        <StyledTableCell align="right">
+                                        <Button variant="contained" color="info" onClick={() => {
+                                                onAdd(product);
+                                                showgarantionform();}}>Add To Cart</Button>
+                                            {/* <button onClick={() => {
+                                                onAdd(product);
+                                                showgarantionform();
+                                            }} className="btn btn-success">Add To Cart
+                                        </button> */}
+                                        </StyledTableCell>
+                                    </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
 
             <GarantionForm garantionform={garantionform} onRemove={onRemove} onSubmit={(e) => addToSalesTable(e)}
@@ -255,6 +289,15 @@ function Sales() {
                                 <h3 className="title pt-2">Garancioni:</h3>
                             </div>
                             <div>
+                                <div className="col-md-12 sales-p-box">
+                                    <div className="form-group gar-pro-det">
+                                        <label for="tabel" className="form-label garnacion-label">Produkti: <div
+                                            className="garnacion-pdetails">{product.product_name}</div></label> <br />
+                                        <label for="tabel" className="form-label garnacion-label b-none pb-none">IMEI:
+                                            <div className="garnacion-pdetails">{product.imei}</div>
+                                        </label> <br />
+                                    </div>
+                                </div>
                                 <div className="row garantion-inputs col-sm-12">
                                     <div className="col-md-6">
                                         <div className="form-group">
@@ -293,27 +336,29 @@ function Sales() {
                                 </div>
                             </div>
                             <div className="col-md-12" key={product.id}>
-                                <div className="form-group">
-                                    <label for="tabel" className="form-label garnacion-label">Produkti: <div
-                                        className="garnacion-pdetails">{product.product_name}</div></label> <br />
-                                    <label for="tabel" className="form-label garnacion-label">IMEI:
-                                        <div className="garnacion-pdetails">{product.imei}</div>
-                                    </label> <br />
-                                    <label for="tabel" className="form-label garnacion-label">Cmimi ne €: <div
-                                        className="garnacion-pdetails"><input type="number" name="sold_price"
+                                <div className="form-group gar-pro-det-2">
+                                    <div className="form-label garnacion-label b-none pb-none center-input"> 
+                                    <div className="garnacion-pdetails"><input type="number" name="sold_price"
                                             className="form-control" id="sold_price"
+                                            placeholder="Zbritje/Çmimi në €"
                                             onChange={e => handleChangeGarantion(e)}
-                                            defaultValue={garantionValues.sold_price} /></div></label>
+                                            defaultValue={garantionValues.sold_price} /></div></div>
                                 </div>
                                 <div className="row garantion-inputs col-sm-12">
                                     <div className="form-group">
-                                        <button type="button" className="btn btn-success" onClick={() => {
+                                    <Button variant="contained" type="submit" 
+                                    onClick={() => {
+                                        addToSalesTable(product);
+                                            createAndDownloadPdf();
+                                            onRemove(product);
+                                            showgarantionform();}}>Përfundo shitjen</Button>
+                                        {/* <button type="button" className="btn btn-success" onClick={() => {
                                             addToSalesTable(product);
                                             createAndDownloadPdf();
                                             onRemove(product);
                                             showgarantionform();
                                         }}>Ruaj
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </div>

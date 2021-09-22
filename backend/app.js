@@ -200,7 +200,7 @@ app.post("/products/get/byfacture", (req, res) => {
 })
 
 app.post("/products/add/company", (req, res) => {
-    console.log(req.body)
+
     let data = {
         product_name: req.body.product_name,
         imei: req.body.imei,
@@ -225,7 +225,7 @@ app.post("/products/add/company", (req, res) => {
 app.post("/products/add/report", (req, res) => {
     let inputs = req.body;
     delete inputs[0]._id;
-    console.log(inputs[0])
+
     queries.createNewProduct(inputs[0]).then(()=>
         res.status(200)
     ).catch((err)=>{
@@ -247,7 +247,6 @@ app.post("/product/add/person", (req, res) => {
         tel_num: req.body.tel_num,
         id_number: req.body.id_number,
     }
-    console.log("--"+JSON.stringify(data))
     queries.createNewProduct(data)
         .then(() => {
             res.json({data: "Product Created Successfully"});
@@ -260,7 +259,6 @@ app.post("/product/add/person", (req, res) => {
 
 app.post("/product/delete/product", (req, res) => {
 
-    console.log("--"+JSON.stringify(req.body))
     queries.removeProduct(req.body.id)
         .then(() => {
             res.json({data: "Product Deleted Successfully"});
@@ -272,8 +270,6 @@ app.post("/product/delete/product", (req, res) => {
 });
 
 app.post("/product/edit", (req, res) => {
-
-    console.log("--"+JSON.stringify(req.body))
 
     let changes = req.body.fields
      console.log( changes)
@@ -291,7 +287,6 @@ app.post("/product/edit", (req, res) => {
 
 app.post("/sales/delete/product", (req, res) => {
 
-    console.log("--"+JSON.stringify(req.body))
     queries.removeSale(req.body.id)
         .then(() => {
             res.json({data: "Product Deleted Successfully"});
@@ -325,6 +320,61 @@ app.post("/sales/edit", (req, res) => {
 
 });
 
+app.post("/factures/add", (req, res) => {
+    let data = {
+        facture_id: req.body.facture_id,
+        facture_date: req.body.facture_date,
+        facture_price: req.body.facture_price,
+        facture_payment: req.body.facture_payment,
+        facture_issuer: req.body.facture_issuer
+    }
+
+    console.log(data)
+
+
+    queries.createNewFacture(data)
+        .then(() => {
+            res.json({data: "Facture Created Successfully"});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send({msg:"internal server errorr", err:err});
+        });
+});
+
+app.post("/factures/edit", (req, res) => {
+
+    let changes = req.body.fields
+     console.log( changes)
+
+    queries.updateFacture(req.body.id, changes)
+    .then(() => {
+        console.log("updated succesfully")
+        res.json({data: "Facture Updated Successfully"});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send("internal server error");
+    })
+});
+
+app.post("/factures/delete/facture", (req, res) => {
+
+    queries.removeFacture(req.body.id)
+        .then(() => {
+            res.json({data: "Facture Deleted Successfully"});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("internal server errorr");
+        });
+});
+
+app.get("/factures/get", (req, res) => {
+    queries.readAllFacture().then((data) => {
+        res.json({data: data});
+    });
+});
 
 //
 // app.post("/addcategory", (req, res) => {

@@ -7,6 +7,7 @@ import * as AiIcons from 'react-icons/ai';
 import * as ImIcons from 'react-icons/im';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import Button from '@mui/material/Button';
 const imei = require('node-imei');
 const imeichecker = new imei();
 
@@ -86,7 +87,19 @@ function Addproduct_p({ partners }) {
                 title: "Produkti u shtua me sukses",
                 showConfirmButton: true,
                 timer: 1500,
-            }).then();
+            }).then(() => {
+                setInputFields([{
+                    productName: '',
+                    productImei: '',
+                    productCategory: 'Celular',
+                    productDate: date,
+                    productPName: '',
+                    productPContactNr: '',
+                    productPIdNr: '',
+                    productBuyPrice: '',
+                    productSellPrice: ''
+                }])
+            });
         } else {
             Swal.fire({
                 icon: "error",
@@ -157,24 +170,37 @@ function Addproduct_p({ partners }) {
                                     onChange={event => handleChangeInput(index, event)}
                                     aria-describedby="emri-produktit"></input>
                             </div>
-                            <div class="col-sm-4">
-                                <label for="tabel" className="form-label">IMEI</label>
-                                <div class="input-group mb-2 imei-field">
+                            {inputField.productCategory == "Celular" ?
+                                <div class="col-sm-4">
+                                    <label for="tabel" className="form-label">IMEI</label>
+                                    <div class="input-group mb-2 imei-field">
                                         <div class="input-group-prepend">
                                             {/* <div class="input-group-text">{imeiValid}</div> */}
                                             <div className={`${fieldCheck} input-group-text`}>{imeiValid}</div>
-                                        </div> 
-                                    <input type="number"
-                                        name="productImei"
-                                        maxLength="15"
-                                        onInput={maxLengthCheck}
-                                        className="form-control small-input"
-                                        value={inputField.productImei}
-                                        id="inlineFormInputGroup"
-                                        onChange={event => handleChangeInputImei(index, event)}
-                                        aria-describedby="imei"></input>
-                                </div>
-                            </div>
+                                        </div>
+                                        <input type="number"
+                                            name="productImei"
+                                            maxLength="15"
+                                            onInput={maxLengthCheck}
+                                            className="form-control small-input"
+                                            value={inputField.productImei}
+                                            id="inlineFormInputGroup"
+                                            onChange={event => handleChangeInputImei(index, event)}
+                                            aria-describedby="imei"></input>
+                                    </div>
+                                </div> :
+                                <div class="col-sm-4">
+                                    <label for="tabel" className="form-label">IMEI</label>
+                                    <div class="input-group mb-2 imei-field">
+                                        <input type="input"
+                                            name="productImei"
+                                            className="form-control"
+                                            value={inputField.productImei}
+                                            id="inlineFormInputGroup"
+                                            onChange={event => handleChangeInput(index, event)}
+                                            aria-describedby="imei"></input>
+                                    </div>
+                                </div>}
                             <div class="col-sm-4">
                                 <label for="tabel" className="form-label">Kategoria</label>
                                 <select className="form-control" name="productCategory"
@@ -207,7 +233,7 @@ function Addproduct_p({ partners }) {
                             </div>
                             <div class="col-sm-4">
                                 <label for="tabel" className="form-label">Nr. Letërnjoftimit</label>
-                                <input type="number" className="form-control" name="productPIdNr"
+                                <input type="input" className="form-control" name="productPIdNr"
                                     value={inputField.productPIdNr}
                                     onChange={event => handleChangeInput(index, event)}
                                     aria-describedby="imei"></input>
@@ -229,9 +255,10 @@ function Addproduct_p({ partners }) {
                         </div>
                     ))}
                     <div className="col-sm-12 align-btn-center pb2">
-                        <button type="submit" className="btn btn-success btn-size" onClick={handleSubmit}>Shto
+                    <Button variant="contained" type="submit" onClick={handleSubmit}>Shto Produktin</Button>
+                        {/* <button type="submit" className="btn btn-success btn-size" onClick={handleSubmit}>Shto
                         Produktin
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>

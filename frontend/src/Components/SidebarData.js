@@ -37,6 +37,11 @@ export const SidebarData = [
         ]
     },
     {
+        title: 'Fakturat',
+        path: '/factures',
+        icon: <FaIcons.FaFileInvoice />,
+    },
+    {
         title: 'Shitje',
         path: '/sales',
         icon: <FaIcons.FaCartPlus />,
@@ -46,16 +51,16 @@ export const SidebarData = [
         path: '/reports',
         icon: <HiIcons.HiOutlineDocumentText />,
     },
-    {
-        title: 'Informacioni',
-        path: '/information',
-        icon: <HiIcons.HiOutlineInformationCircle />,
-    },
-    {
-        title: 'Llogaria',
-        path: '/account',
-        icon: <RiIcons.RiAccountCircleFill />,
-    },
+    // {
+    //     title: 'Informacioni',
+    //     path: '/information',
+    //     icon: <HiIcons.HiOutlineInformationCircle />,
+    // },
+    // {
+    //     title: 'Llogaria',
+    //     path: '/account',
+    //     icon: <RiIcons.RiAccountCircleFill />,
+    // },
     {
         title: 'Servisi',
         path: '/settings',

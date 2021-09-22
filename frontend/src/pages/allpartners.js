@@ -1,10 +1,39 @@
 import React, {useState, useEffect} from 'react';
 import * as FiIcons from 'react-icons/fi';
-import styled from 'styled-components';
+import styled2 from 'styled-components';
+import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const EditPartner = styled.nav`
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
+const EditPartner = styled2.nav`
   right: ${({ editpartner }) => (editpartner ? '0px' : '-100%')};
   transition: 100ms;
   z-index: 11;
@@ -114,31 +143,37 @@ function Allpartners() {
 
     return (
         <>
-        class="col-md-1"
             <div className="page-name">
                 <h3>Partnerët e biznesit</h3>
             </div>
-        <div className='allpartners pt6'>
-        <table class="table table-hover table-sm">
-                <thead class="table-dark">
-                    <tr>
-                    <th class="col-md-6">Partneri</th>
-                    <th class="col-md-5">Nr. Kontaktit</th>
-                    <th>Edit/Delete</th>
-                    </tr>
-                </thead>
-                {[...partners].reverse().map(partner => (
-                <tbody>
-                    <tr>
-                    <td class="col-md-6">{partner.company_name}</td>
-                    <td class="col-md-5">{partner.phone_number}</td> 
-                    <td className="edit-delete"><div className="edit" onClick={() => {
-                                    onEdit(partner);
-                                    showEditPartner();}}><FiIcons.FiEdit2 /></div><div className="delete" onClick={() => removePartner(partner._id)}><FiIcons.FiTrash /></div></td>
-                    </tr>
-                </tbody>
-                ))}
-            </table>
+        <div className='allpartners pt2 pb2'>
+            <TableContainer className="partners-table" component={Paper}>
+            <Table sx={{ maxWidth: 650 }} aria-label="customized table">
+                <TableHead>
+                    <TableRow className="table-head">
+                        <StyledTableCell className="col-sm-6">Partneri</StyledTableCell>
+                        <StyledTableCell className="col-sm-5">Nr. Kontaktit</StyledTableCell>
+                        <StyledTableCell>Edit/Delete</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody className="table-data">
+                    {[...partners].reverse().map(partner => (
+                        <StyledTableRow
+                        key={partner._id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <StyledTableCell>{partner.company_name}</StyledTableCell>
+                            <StyledTableCell>{partner.phone_number}</StyledTableCell> 
+                            <StyledTableCell className="edit-delete"><div className="edit" onClick={() => {
+                                onEdit(partner);
+                                showEditPartner();}}><FiIcons.FiEdit2 /></div>
+                                <div className="delete" onClick={() => removePartner(partner._id)}><FiIcons.FiTrash /></div>
+                            </StyledTableCell>
+                        </StyledTableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
         <EditPartner editpartner={editPartner} className="garantion-form">
                 {editItem.map((partner, idx) => (
@@ -167,11 +202,16 @@ function Allpartners() {
                             ))}
                             <div className="row garantion-inputs col-sm-12">
                                 <div className="form-group">
-                                    <button type="button" className="btn btn-success" onClick={() => {
+                                <Button variant="contained" type="submit" onClick={() => {
                                         updatePartner(partner);
                                         onRemove(partner);
                                         showEditPartner();
-                                    }}>Ruaj ndryshimet</button>
+                                    }}>Ruaj ndryshimet</Button>
+                                    {/* <button type="button" className="btn btn-success" onClick={() => {
+                                        updatePartner(partner);
+                                        onRemove(partner);
+                                        showEditPartner();
+                                    }}>Ruaj ndryshimet</button> */}
                                 </div>
                             </div>
                         </div>

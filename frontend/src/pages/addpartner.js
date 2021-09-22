@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as AiIcons from 'react-icons/ai';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import Button from '@mui/material/Button';
 
 const Partnerbutton = styled(Link)`
 `;
@@ -80,6 +81,9 @@ function Addpartner() {
                 <h3>Shto partner</h3>
             </div>
         <div className='addpartner pt2'>
+            <div className="btn-all-partners">
+            <Partnerbutton to={'./allpartners'} ><Button variant="contained" color="info">Shiko partnerët</Button></Partnerbutton>
+            </div>
             <div className="form-container" onSubmit={handleSubmit}>
             { inputFields.map((inputField, index) => (
                 <div className="partner-container container input-group" key={index}>
@@ -92,22 +96,27 @@ function Addpartner() {
                         <input type="number" className="form-control" name="partnerContact" value={inputField.partnerContact} onChange={event => handleChangeInput(index, event)} aria-describedby="shifra"></input>
                     </div>
                     <div className="col-sm-12 pt-2">
-                        <button type="button" className="btn btn-danger btn-size-4" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
+                        <Button variant="outlined" className="dupf-btn" color="error" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
+                            <AiIcons.AiOutlineMinusCircle />
+                        </Button>
+                        <Button variant="contained" className="dupf-btn" disableElevation onClick={handleAddFields}>
+                            <AiIcons.AiOutlinePlusCircle />
+                        </Button>
+                        {/* <button type="button" className="btn btn-danger btn-size-4" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                         <AiIcons.AiOutlineMinusCircle />
                         </button>
                         <button type="button" className="btn btn-success btn-size-5" onClick={handleAddFields}>
                         <AiIcons.AiOutlinePlusCircle />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 )) }
                     <div className="col-sm-12 align-btn-center p2">
-                        <div className="col-sm-6">
+                        {/* <div className="col-sm-6">
                             <Partnerbutton type="button" className="btn btn-warning btn-size" to={'./allpartners'} >Shiko partnerët</Partnerbutton>
-                        </div>
-                        <div className="col-sm-6">
-                            <button type="button" className="btn btn-success btn-size" onClick={handleSubmit}>Shto partnerin</button>
-                        </div>
+                        </div> */}
+                        <Button variant="contained" type="submit" onClick={handleSubmit}>Shto Partnerin</Button>
+                            {/* <button type="button" className="btn btn-success btn-size" onClick={handleSubmit}>Shto partnerin</button> */}
                     </div>
             </div>
         </div>
