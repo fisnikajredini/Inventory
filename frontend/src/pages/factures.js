@@ -209,15 +209,14 @@ function Factures() {
                                 <StyledTableCell>Edit/Delete</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody className="table-data">
                             {[...partners].reverse().map(partner => (
-                            <StyledTableRow>
-                                <div
+                        <TableBody className="table-data">
+                                <StyledTableRow
                                     key={partner._id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                     <StyledTableCell><ExpandMore
                                         expand={expanded}
-                                        onClick={e => handleExpandClick(e)}
+                                        onClick={() => handleExpandClick()}
                                         aria-expanded={expanded}
                                         aria-label="show more"><ExpandMoreIcon/></ExpandMore>{partner.company_name}</StyledTableCell>
                                     <StyledTableCell align="right">{partner.phone_number}</StyledTableCell>
@@ -234,7 +233,8 @@ function Factures() {
                                     }}><FiIcons.FiEdit2 /></div>
                                         <div className="delete" onClick={() => removeFacture(factures._id)}><FiIcons.FiTrash /></div>
                                     </StyledTableCell> */}
-                                </div>
+                                </StyledTableRow>
+                                <StyledTableRow>
                                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                                         <CardContent>
                                             <table class="table">
@@ -263,9 +263,9 @@ function Factures() {
                                             </table>
                                         </CardContent>
                                     </Collapse>
-                            </StyledTableRow>
-                            ))}
+                                    </StyledTableRow>
                         </TableBody>
+                            ))}
                     </Table>
                 </TableContainer>
             </div>
