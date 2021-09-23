@@ -67,7 +67,7 @@ const ExpandMore = styled((props) => {
 function Factures() {
 
     const [factures, setFactures] = useState([]);
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
     const [editfacture, setEditFacture] = useState(false);
     const [partners, setPartners] = useState([]);
     const showEditFacture = () => setEditFacture(!editfacture);
@@ -98,7 +98,7 @@ function Factures() {
         // });
     }, []);
 
-    const handleExpandClick = (e) => {
+    const handleExpandClick = () => {
         setExpanded(!expanded);
       };
 
@@ -371,3 +371,5 @@ function Factures() {
 }
 
 export default Factures
+
+

@@ -5,7 +5,7 @@
   "main": "index.js",
   "homepage": "./http://localhost:3000/sales",
   "scripts": {
-    "start": "concurrently \"nodemon app.js\" \"cd../frontend && npm start\"",
+    "start": "concurrently \"nodemon app.js\" \"cd ../frontend && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
